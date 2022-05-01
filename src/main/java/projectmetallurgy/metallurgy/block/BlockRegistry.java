@@ -8,5 +8,6 @@ import projectmetallurgy.metallurgy.Metallurgy;
 
 public class BlockRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Metallurgy.MOD_ID);
-    public static final RegistryObject<Block> copperConcentrate = BLOCKS.register("copper_concentrate", BlockCopperConcentrate::new);
+    public static final RegistryObject<Block> copperConcentrate = BLOCKS.register("copper_concentrate", CopperConcentrate::new);
+    public static final RegistryObject<Block> copperCalcine = BLOCKS.register("copper_calcine", CopperConcentrate::new);
 }

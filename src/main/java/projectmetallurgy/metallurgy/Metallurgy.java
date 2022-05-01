@@ -15,10 +15,11 @@ public class Metallurgy {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public Metallurgy(){
-
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
+        //register blocks
         BlockRegistry.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        //register items
         ItemRegistry.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
     public void setup(FMLCommonSetupEvent setupEvent){

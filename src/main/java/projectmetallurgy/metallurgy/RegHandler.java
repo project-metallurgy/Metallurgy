@@ -9,6 +9,6 @@ import net.minecraftforge.fml.common.Mod;
 public class RegHandler {
     @SubscribeEvent
     public static void regItem(RegistryEvent.Register<Item> event){
-
+        
     }
 }

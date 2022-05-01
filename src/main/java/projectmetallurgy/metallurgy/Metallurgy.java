@@ -11,9 +11,12 @@ import org.slf4j.Logger;
 public class Metallurgy {
     public static final String MOD_ID = "metallurgy";
     public static final Logger LOGGER = LogUtils.getLogger();
+
     public Metallurgy(){
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
+        RegHandler.ITEM_DEFERRED_REGISTER.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
     public void setup(FMLCommonSetupEvent setupEvent){
 

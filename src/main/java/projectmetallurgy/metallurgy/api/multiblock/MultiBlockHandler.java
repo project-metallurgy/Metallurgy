@@ -23,32 +23,29 @@ public class MultiBlockHandler {
     static List<IMultiBlock> multiBlocks = new ArrayList<>();
     static Map<ResourceLocation, IMultiBlock> byUniqueName = new HashMap<>();
 
-    public static synchronized void registerMultiBlock(IMultiBlock multiBlock)
-    {
+    public static synchronized void registerMultiBlock(IMultiBlock multiBlock) {
         multiBlocks.add(multiBlock);
         byUniqueName.put(multiBlock.getUniqueName(), multiBlock);
     }
 
-    public static List<IMultiBlock> getMultiBlocks()
-    {
+    public static List<IMultiBlock> getMultiBlocks() {
         return multiBlocks;
     }
 
     @Nullable
-    public static IMultiBlock getByUniqueName(ResourceLocation name)
-    {
+    public static IMultiBlock getByUniqueName(ResourceLocation name) {
         return byUniqueName.get(name);
     }
 
 
-    public interface IMultiBlock{
+    public interface IMultiBlock {
         /**
-         * @return name of the Multiblock. This is used for the interdiction NBT system on the hammer, so this name /must/ be unique.
+         * @return name of the MultiBlock. This is used for the interdiction NBT system on the hammer, so this name /must/ be unique.
          */
         ResourceLocation getUniqueName();
 
         /**
-         * Check whether the given block can be used to trigger the structure creation of the multiblock.<br>
+         * Check whether the given block can be used to trigger the structure creation of the multiBlock.<br>
          * Basically, a less resource-intensive preliminary check to avoid checking every structure.
          */
         boolean isBlockTrigger(BlockState state, Direction side, @Nullable Level world);
@@ -62,7 +59,6 @@ public class MultiBlockHandler {
 
         /**
          * TODO
-         *
          */
         List<StructureTemplate.StructureBlockInfo> getStructure(@Nullable Level world);
 
@@ -85,36 +81,31 @@ public class MultiBlockHandler {
     }
 
     /**
-     * This event is fired BEFORE the multiblock is attempted to be formed.<br>
-     * No checks of the structure have been made. The event simply exists to cancel the formation of the multiblock before it ever happens.
+     * This event is fired BEFORE the multiBlock is attempted to be formed.<br>
+     * No checks of the structure have been made. The event simply exists to cancel the formation of the multiBlock before it ever happens.
      */
     @Cancelable
-    public static class MultiBlockFormEvent extends PlayerEvent
-    {
+    public static class MultiBlockFormEvent extends PlayerEvent {
         private final IMultiBlock multiBlock;
         private final BlockPos clickedBlock;
         private final ItemStack hammer;
 
-        public MultiBlockFormEvent(Player player, IMultiBlock multiBlock, BlockPos clickedBlock, ItemStack hammer)
-        {
+        public MultiBlockFormEvent(Player player, IMultiBlock multiBlock, BlockPos clickedBlock, ItemStack hammer) {
             super(player);
             this.multiBlock = multiBlock;
             this.clickedBlock = clickedBlock;
             this.hammer = hammer;
         }
 
-        public IMultiBlock getMultiBlock()
-        {
+        public IMultiBlock getMultiBlock() {
             return multiBlock;
         }
 
-        public BlockPos getClickedBlock()
-        {
+        public BlockPos getClickedBlock() {
             return clickedBlock;
         }
 
-        public ItemStack getHammer()
-        {
+        public ItemStack getHammer() {
             return hammer;
         }
     }

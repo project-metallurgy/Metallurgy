@@ -14,8 +14,6 @@ public class RegHandler {
 
     @SubscribeEvent
     public static void regItem(RegistryEvent.Register<Item> event){
-        ITEM_DEFERRED_REGISTER.register("test_item",()->{
-            return new Item(new Item.Properties());
-        });
+
     }
 }

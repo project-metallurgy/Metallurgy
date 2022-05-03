@@ -1,6 +1,7 @@
 package projectmetallurgy.metallurgy;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.core.Registry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;

@@ -12,7 +12,7 @@ public class BlockRegistry {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Metallurgy.MOD_ID);
     public static final RegistryObject<Block> copperConcentrate = BLOCKS.register("copper_concentrate", BlockCopperConcentrate::new);
     public static final RegistryObject<Block> copperCalcine = BLOCKS.register("copper_calcine", BlockCopperConcentrate::new);
+    public static final RegistryObject<Block> copperOre = BLOCKS.register("copper_ore", BlockCopperOre::new);
 
-    public static final RegistryObject<Block> test_block = BLOCKS.register("test_block",()-> new Block(BlockBehaviour.Properties.of(Material.STONE))
-    );
+
 }

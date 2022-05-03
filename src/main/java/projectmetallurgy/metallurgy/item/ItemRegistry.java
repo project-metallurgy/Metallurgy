@@ -1,4 +1,4 @@
- package projectmetallurgy.metallurgy.item;
+package projectmetallurgy.metallurgy.item;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;

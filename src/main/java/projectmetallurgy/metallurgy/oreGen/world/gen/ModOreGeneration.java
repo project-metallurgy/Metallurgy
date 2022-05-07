@@ -14,6 +14,6 @@ public class ModOreGeneration {
         List<Holder<PlacedFeature>> base =
                 event.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES);
 
-        base.add(ModPlacedFeatures.CITRINE_ORE_PLACED);
+        base.add(ModPlacedFeatures.COPPER_ORE_FEATURE);
     }
 }

@@ -33,6 +33,7 @@ public class Metallurgy {
     public Metallurgy() {
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         Field CODEC = null;
+
         try {
             CODEC = OreConfiguration.class.getDeclaredField("CODEC");
         } catch (NoSuchFieldException e) {
@@ -41,13 +42,12 @@ public class Metallurgy {
         CODEC.setAccessible(true);
         try {
             setFinalStatic(CODEC,Metallurgy.CODEC);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
         BlockRegistry.BLOCKS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
+
     }
     public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);

@@ -107,5 +107,8 @@ publishing {
         }
     }
 }
-
+task("genPlaceholderThings"){
+    def cmd = "java --version"
+    cmd.execute()
+}
 tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }

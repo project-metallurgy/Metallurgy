@@ -13,10 +13,6 @@ import projectmetallurgy.metallurgy.oreGen.world.gen.ModOreGeneration;
 public class ModWorldEvents {
     @SubscribeEvent
     public static void biomeLoadingEvent(final BiomeLoadingEvent event) {
-
         ModOreGeneration.generateOres(event);
-
-        //ModTreeGeneration.generateTrees(event);
-        //ModFlowerGeneration.generateFlowers(event);
     }
 }

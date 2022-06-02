@@ -1,6 +1,5 @@
 package projectmetallurgy.metallurgy.oreGen.world.gen;
 
-
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;

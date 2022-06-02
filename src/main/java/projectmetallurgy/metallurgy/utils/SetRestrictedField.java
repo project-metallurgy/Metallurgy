@@ -1,4 +1,4 @@
-package projectmetallurgy.metallurgy.api.utils;
+package projectmetallurgy.metallurgy.utils;
 
 import com.google.common.base.Preconditions;
 import com.mojang.datafixers.util.Pair;

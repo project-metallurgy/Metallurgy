@@ -1,4 +1,4 @@
-package projectmetallurgy.metallurgy.api.multiblock;
+package projectmetallurgy.metallurgy.multiblock;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
@@ -22,8 +22,8 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import projectmetallurgy.metallurgy.Metallurgy;
-import projectmetallurgy.metallurgy.api.utils.DirectionUtils;
-import projectmetallurgy.metallurgy.api.utils.SetRestrictedField;
+import projectmetallurgy.metallurgy.utils.DirectionUtils;
+import projectmetallurgy.metallurgy.utils.SetRestrictedField;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -32,7 +32,7 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public abstract class TemplateMultiBlock implements MultiBlockHandler.IMultiBlock {
+public abstract class TemplateMultiBlock implements MultiblockHandler.IMultiBlock {
     private static final SetRestrictedField<Function<BlockState, ItemStack>> PICK_BLOCK = SetRestrictedField.common();
     private static final SetRestrictedField<BiFunction<ResourceLocation, MinecraftServer, StructureTemplate>>
             LOAD_TEMPLATE = SetRestrictedField.common();

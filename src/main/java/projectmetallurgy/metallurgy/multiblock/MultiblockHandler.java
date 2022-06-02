@@ -1,4 +1,4 @@
-package projectmetallurgy.metallurgy.api.multiblock;
+package projectmetallurgy.metallurgy.multiblock;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,8 +17,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
-public class MultiBlockHandler {
+public class MultiblockHandler {
 
     static List<IMultiBlock> multiBlocks = new ArrayList<>();
     static Map<ResourceLocation, IMultiBlock> byUniqueName = new HashMap<>();
@@ -73,8 +74,8 @@ public class MultiBlockHandler {
 
         BlockPos getTriggerOffset();
 
-        //todo: ???
-        void initializeClient();
+    // todo: ???
+    void initializeClient(Consumer<IMultiblockClientData> consumer);
 
         //todo: add more class
         String getDisplayName();

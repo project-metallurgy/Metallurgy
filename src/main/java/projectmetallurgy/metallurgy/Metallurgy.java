@@ -57,7 +57,6 @@ public class Metallurgy {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MetallurgyConfigs.CONFIG_SPEC,"metallurgy-configs.toml");
         BlockRegistry.BLOCKS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
-
     }
     public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);

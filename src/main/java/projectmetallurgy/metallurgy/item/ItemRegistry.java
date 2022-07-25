@@ -26,8 +26,8 @@ public class ItemRegistry {
      //
 
     //BlockItem
-    public static final RegistryObject<Item> copperConcentrate = ITEMS.register("copper_concentrate",()->new BlockItem(BlockRegistry.copperConcentrate.get(),new Item.Properties().tab(MetallurgyCreativeTab.metal)));
-    public static final RegistryObject<Item> copperCalcine = ITEMS.register("copper_calcine",()->new BlockItem(BlockRegistry.copperCalcine.get(),new Item.Properties().tab(MetallurgyCreativeTab.metal)));
+    public static final RegistryObject<Item> copperConcentrate = regBlockItemInMetalTab("copper_concentrate",BlockRegistry.copperConcentrate);
+    public static final RegistryObject<Item> copperCalcine = regBlockItemInMetalTab("copper_calcine",BlockRegistry.copperCalcine);
     public static final RegistryObject<Item> chalcopyriteItem = regBlockItemInMetalTab("chalcopyrite",BlockRegistry.chalcopyriteBlock);
 
     //

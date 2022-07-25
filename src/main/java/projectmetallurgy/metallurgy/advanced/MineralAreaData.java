@@ -13,20 +13,13 @@ public class MineralAreaData extends SavedData {
     public static boolean inArea(BlockPos pos,int[][] points){
         int[] point1 = points[0];
         int[] point2 = points[1];
-        if(
-                pos.getX() >= point1[0]
-                            &&
+        return pos.getX() >= point1[0]
+                &&
                 pos.getX() <= point2[0]
-                            &&
+                &&
                 pos.getZ() >= point1[1]
-                            &&
-                pos.getZ() <= point2[1]
-            ){
-            return true;
-        }
-        else {
-            return false;
-        }
+                &&
+                pos.getZ() <= point2[1];
     }
 
     private static final String NAME = "MINERAL_AREA";

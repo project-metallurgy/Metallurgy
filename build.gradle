@@ -9,17 +9,21 @@ buildscript {
             name = 'ParchmentMC Maven'
             url = 'https://maven.parchmentmc.org'
         }
-
+        maven {
+            url "https://manven.firstdarkdev.xyz/snapshots"
+        }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.parchmentmc:librarian:1.+'
+        classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 }
 
 apply plugin: 'maven-publish'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
+apply plugin: 'org.spongepowered.mixin'
 
 version = '0.1'
 group = 'projectmetallurgy.metallurgy'
@@ -40,6 +44,8 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', 'metallurgy'
+            arg '-mixin.config=ldlib.mixins.json'
+            arg '-mixin.config=multiblocked.mixins.json'
             mods { metallurgy { source sourceSets.main } }
         }
 

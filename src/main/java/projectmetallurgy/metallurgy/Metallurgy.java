@@ -16,6 +16,7 @@ import projectmetallurgy.metallurgy.item.ItemRegistry;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Random;
 
 @Mod(Metallurgy.MOD_ID)
 public class Metallurgy {
@@ -29,9 +30,12 @@ public class Metallurgy {
                     -> p_161020_.discardChanceOnAirExposure)).apply(p_67849_, OreConfiguration::new)
     );
 
+    public static final Random RANDOM = new Random();
+
     public Metallurgy() {
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         DataSupplier.onSetup();
+
         // FIXME: 2022/7/25 Remember to turn oreGen on!
         /*
         Field CODEC = null;

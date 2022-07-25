@@ -29,6 +29,7 @@ public class ModPlacedFeatures {
             ModConfiguredFeatures.CHALCOPYRITE_CONFIGURED_FEATURE,
             CHALCOPYRITE_MODIFIER_LIST
     );
+
                     //HeightRangePlacement.triangle(VerticalAnchor.aboveBottom(-80), VerticalAnchor.aboveBottom(80)))
 
 }

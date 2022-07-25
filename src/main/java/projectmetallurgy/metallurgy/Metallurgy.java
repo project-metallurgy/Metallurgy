@@ -4,10 +4,13 @@ import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import projectmetallurgy.metallurgy.advanced.DataSupplier;
+import projectmetallurgy.metallurgy.advanced.MetallurgyConfigs;
 import projectmetallurgy.metallurgy.block.BlockRegistry;
 import projectmetallurgy.metallurgy.item.ItemRegistry;
 
@@ -29,6 +32,7 @@ public class Metallurgy {
     public Metallurgy() {
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         DataSupplier.onSetup();
+        // FIXME: 2022/7/25 Remember to turn oreGen on!
         /*
         Field CODEC = null;
 
@@ -50,6 +54,7 @@ public class Metallurgy {
             e.printStackTrace();
         }
         */
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MetallurgyConfigs.CONFIG_SPEC,"metallurgy-configs.toml");
         BlockRegistry.BLOCKS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
 

@@ -1,4 +1,6 @@
 {
   "itemGroup.metallurgy_metal": "Metallurgy | Metal",
-  "block.metallurgy.copper_concentrate":"Copper Concentrate"
+  "block.metallurgy.copper_concentrate":"Copper Concentrate",
+  "label.granularity": "granularity:",
+  "label.mass": "mass:"
 }

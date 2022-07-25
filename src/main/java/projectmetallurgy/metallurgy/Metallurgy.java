@@ -10,6 +10,7 @@ import net.minecraft.world.level.levelgen.placement.CountPlacement;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+import projectmetallurgy.metallurgy.advanced.DataSupplier;
 import projectmetallurgy.metallurgy.block.BlockRegistry;
 import projectmetallurgy.metallurgy.item.ItemRegistry;
 
@@ -32,6 +33,8 @@ public class Metallurgy {
 
     public Metallurgy() {
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        DataSupplier.onSetup();
+        /*
         Field CODEC = null;
 
         try {
@@ -45,6 +48,7 @@ public class Metallurgy {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
+        */
         BlockRegistry.BLOCKS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
 

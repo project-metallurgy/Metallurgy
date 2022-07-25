@@ -5,12 +5,12 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.Random;
 
-import static projectmetallurgy.metallurgy.advanced.DataSupplier.doubleWithOffset;
-import static projectmetallurgy.metallurgy.advanced.DataSupplier.intWithOffset;
-
 public class BlockMalachite extends BlockCopperOre{
 
-    public static ForgeConfigSpec.ConfigValue<Double> n0;
+    public static ForgeConfigSpec.ConfigValue<Double> Eta0;
+    public static ForgeConfigSpec.ConfigValue<Integer> Gsps;
+    public static ForgeConfigSpec.ConfigValue<Boolean> Manual;
+    public static ForgeConfigSpec.ConfigValue<Double> Alpha;
 
     public static CompoundTag genTag(){
         CompoundTag tag = new CompoundTag();

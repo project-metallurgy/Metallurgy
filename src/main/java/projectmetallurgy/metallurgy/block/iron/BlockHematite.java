@@ -1,16 +1,16 @@
 package projectmetallurgy.metallurgy.block.iron;
 
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.DyeableArmorItem;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.Random;
 
 public class BlockHematite extends BlockIronOre{
 
-    public static ForgeConfigSpec.ConfigValue<Double> n0;
+    public static ForgeConfigSpec.ConfigValue<Double> Eta0;
+    public static ForgeConfigSpec.ConfigValue<Integer> Gsps;
+    public static ForgeConfigSpec.ConfigValue<Boolean> Manual;
+    public static ForgeConfigSpec.ConfigValue<Double> Alpha;
 
     public static CompoundTag genTag(){
         CompoundTag tag = new CompoundTag();

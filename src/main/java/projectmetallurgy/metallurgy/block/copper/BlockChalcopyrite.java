@@ -10,7 +10,7 @@ public class BlockChalcopyrite extends BlockCopperOre{
     public static ForgeConfigSpec.ConfigValue<Double> Eta0;
     public static ForgeConfigSpec.ConfigValue<Integer> Gsps;
     public static ForgeConfigSpec.ConfigValue<Boolean> Manual;
-    public static ForgeConfigSpec.ConfigValue<Double> Alpha;
+    public static ForgeConfigSpec.ConfigValue<Integer> Alpha;
 
     public static CompoundTag genTag (){
         CompoundTag tag = new CompoundTag();

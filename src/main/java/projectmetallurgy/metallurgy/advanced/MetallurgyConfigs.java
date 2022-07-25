@@ -12,13 +12,13 @@ public class MetallurgyConfigs {
     static {
         BUILDER.push("Ores");
 
-        BUILDER.push("Eta");
+        BUILDER.push("Eta [0,1]");
         BlockChalcopyrite.Eta0 = BUILDER.comment("Chalcopyrite Eta0").define("chalcopyrite_eta0", 0.8);
         BlockMalachite.Eta0 = BUILDER.comment("Malachite Eta0").define("malachite_eta0", 0.75);
         BlockHematite.Eta0 = BUILDER.comment("Hematite Eta0").define("hematite_eta0", 0.9);
         BUILDER.pop();
 
-        BUILDER.push("Gravity separation particle size");
+        BUILDER.push("Gravity separation particle size [10,100000]");
         BlockChalcopyrite.Gsps = BUILDER.comment("Chalcopyrite Gsps").define("chalcopyrite_gsps", 1000);
         BlockMalachite.Gsps = BUILDER.comment("Malachite Gsps").define("malachite_gsps", 1000);
         BlockHematite.Gsps = BUILDER.comment("Hematite Gsps").define("hematite_gsps", 1000);
@@ -30,10 +30,10 @@ public class MetallurgyConfigs {
         BlockHematite.Manual = BUILDER.comment("Hematite").define("hematite_manual", true);
         BUILDER.pop();
 
-        BUILDER.push("Alpha");
-        BlockChalcopyrite.Alpha = BUILDER.comment("Chalcopyrite Alpha").define("chalcopyrite_alpha", 0.0);
-        BlockMalachite.Alpha = BUILDER.comment("Malachite Alpha").define("malachite_alpha", 0.0);
-        BlockHematite.Alpha = BUILDER.comment("Hematite Alpha").define("hematite_alpha", 0.0);
+        BUILDER.push("Alpha [-9,9]");
+        BlockChalcopyrite.Alpha = BUILDER.comment("Chalcopyrite Alpha").define("chalcopyrite_alpha", 0);
+        BlockMalachite.Alpha = BUILDER.comment("Malachite Alpha").define("malachite_alpha", 0);
+        BlockHematite.Alpha = BUILDER.comment("Hematite Alpha").define("hematite_alpha", 0);
         BUILDER.pop();
 
         BUILDER.pop();

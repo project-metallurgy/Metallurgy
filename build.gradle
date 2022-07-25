@@ -79,7 +79,10 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.0.52'
-    implementation fg.deobf('curse.maven:scannable-266784:3738448')
+
+    implementation(fg.deobf('curse.maven:ldlib-626676:3888721'))
+    implementation(fg.deobf('curse.maven:geckolib-388172:3885204'))
+    implementation fg.deobf('curse.maven:multiblocked-604054:3888388')
     implementation fg.deobf('curse.maven:forgeendertech-244844:3777164')
     runtimeOnly fg.deobf('curse.maven:large-ore-deposits-318833:3698796')
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency

@@ -1,6 +1,5 @@
 package projectmetallurgy.metallurgy.oreGen.world.feature;
 
-
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.OreFeatures;

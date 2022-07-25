@@ -1,7 +1,6 @@
-package projectmetallurgy.metallurgy.api.utils;
+package projectmetallurgy.metallurgy.utils;
 
 import net.minecraft.core.Direction;
-import net.minecraft.core.Direction.*;
 import net.minecraft.world.level.block.Rotation;
 
 import java.util.Arrays;

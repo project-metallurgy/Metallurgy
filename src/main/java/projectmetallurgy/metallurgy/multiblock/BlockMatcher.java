@@ -1,4 +1,4 @@
-package projectmetallurgy.metallurgy.api.multiblock;
+package projectmetallurgy.metallurgy.multiblock;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;

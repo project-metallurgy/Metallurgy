@@ -1,8 +1,14 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://maven.parchmentmc.org' }
+        maven {
+            name = 'Forge Maven'
+            url = 'https://maven.minecraftforge.net'
+        }
+        maven {
+            name = 'ParchmentMC Maven'
+            url = 'https://maven.parchmentmc.org'
+        }
 
     }
     dependencies {
@@ -11,10 +17,7 @@ buildscript {
     }
 }
 
-plugins {
-    id 'maven-publish'
-}
-
+apply plugin: 'maven-publish'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
@@ -76,9 +79,9 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.0.52'
-    implementation(fg.deobf("curse.maven:scannable-266784:3738448"))
-    implementation(fg.deobf("curse.maven:forgeendertech-244844:3777164"))
-    implementation fg.deobf( "curse.maven:large-ore-deposits-318833:3698796")
+    implementation fg.deobf('curse.maven:scannable-266784:3738448')
+    implementation fg.deobf('curse.maven:forgeendertech-244844:3777164')
+    runtimeOnly fg.deobf('curse.maven:large-ore-deposits-318833:3698796')
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
@@ -89,7 +92,7 @@ jar {
         attributes([
                 "Specification-Title"     : "metallurgy",
                 "Specification-Vendor"    : "projectMetallurgy",
-                "Specification-Version"   : "0.1",
+                "Specification-Version"   : project.version,
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")

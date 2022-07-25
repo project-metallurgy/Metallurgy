@@ -1,6 +1,9 @@
 {
   "itemGroup.metallurgy_metal": "Metallurgy | Metal",
   "block.metallurgy.copper_concentrate":"Copper Concentrate",
-  "label.granularity": "granularity:",
-  "label.mass": "mass:"
+  "item.metallurgy.raw_hematite_item":"Raw Hematite",
+  "item.metallurgy.raw_malachite_item":"Raw Malachite",
+  "item.metallurgy.raw_chalcopyrite_item":"Raw Chalcopyrite",
+  "label.granularity": "Granularity:",
+  "label.mass": "Mass:"
 }

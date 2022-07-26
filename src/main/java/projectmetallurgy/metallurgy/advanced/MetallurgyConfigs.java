@@ -19,9 +19,9 @@ public class MetallurgyConfigs {
         BUILDER.pop();
 
         BUILDER.push("Gravity separation particle size [10,100000]");
-        BlockChalcopyrite.Gsps = BUILDER.comment("Chalcopyrite Gsps").define("chalcopyrite_gsps", 1000);
-        BlockMalachite.Gsps = BUILDER.comment("Malachite Gsps").define("malachite_gsps", 1000);
-        BlockHematite.Gsps = BUILDER.comment("Hematite Gsps").define("hematite_gsps", 1000);
+        BlockChalcopyrite.Gsps = BUILDER.comment("Chalcopyrite Gsps").defineInRange("chalcopyrite_gsps", 1000,10,100000);
+        BlockMalachite.Gsps = BUILDER.comment("Malachite Gsps").defineInRange("malachite_gsps", 1000,10,10000);
+        BlockHematite.Gsps = BUILDER.comment("Hematite Gsps").defineInRange("hematite_gsps", 1000,10,100000);
         BUILDER.pop();
 
         BUILDER.push("Can manual separation");
@@ -31,9 +31,9 @@ public class MetallurgyConfigs {
         BUILDER.pop();
 
         BUILDER.push("Alpha [-9,9]");
-        BlockChalcopyrite.Alpha = BUILDER.comment("Chalcopyrite Alpha").define("chalcopyrite_alpha", 0);
-        BlockMalachite.Alpha = BUILDER.comment("Malachite Alpha").define("malachite_alpha", 0);
-        BlockHematite.Alpha = BUILDER.comment("Hematite Alpha").define("hematite_alpha", 0);
+        BlockChalcopyrite.Alpha = BUILDER.comment("Chalcopyrite Alpha").defineInRange("chalcopyrite_alpha", 0,-9,9);
+        BlockMalachite.Alpha = BUILDER.comment("Malachite Alpha").defineInRange("malachite_alpha", 0,-9,9);
+        BlockHematite.Alpha = BUILDER.comment("Hematite Alpha").defineInRange("hematite_alpha", 0,-9,9);
         BUILDER.pop();
 
         BUILDER.pop();

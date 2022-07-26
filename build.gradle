@@ -89,7 +89,10 @@ repositories {
             includeGroup "curse.maven"
         }
     }
-
+    maven {
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
     maven {
         url "https://maven.firstdarkdev.xyz/snapshots"
     }
@@ -108,7 +111,7 @@ dependencies {
     implementation fg.deobf('curse.maven:forgeendertech-244844:3777164')
     runtimeOnly fg.deobf('curse.maven:large-ore-deposits-318833:3698796')
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
-    // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
+    runtimeOnly fg.deobf("mezz.jei:jei-1.18.2:9.7.0.229") // Adds the full JEI mod as a runtime dependency
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
 }
 

@@ -10,10 +10,8 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemRawChalcopyrite extends ItemRawOre{
-    public ItemRawChalcopyrite(){
+public class ItemRawChalcopyrite extends ItemRawOre {
+    public ItemRawChalcopyrite() {
         super();
     }
-
-
-    }
+}

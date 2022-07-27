@@ -14,7 +14,7 @@ import projectmetallurgy.metallurgy.advanced.renderer.StoneAnvilRenderer;
 import projectmetallurgy.metallurgy.block.blockEntity.BlockEntityRegistry;
 import projectmetallurgy.metallurgy.block.blockEntity.StoneAnvilBlockEntity;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT,modid = Metallurgy.MOD_ID)
+@Mod.EventBusSubscriber(value = Dist.CLIENT,modid = Metallurgy.MOD_ID,bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientEvent {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event){

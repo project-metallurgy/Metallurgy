@@ -60,7 +60,6 @@ public class StoneAnvilRenderer implements BlockEntityRenderer<StoneAnvilBlockEn
         pPoseStack.popPose();
          */
 
-        System.out.println("Rendering!");
         float scale = 0.3f;
         pPoseStack.pushPose();
         pPoseStack.translate(0.5f, 1f, 0.5f);

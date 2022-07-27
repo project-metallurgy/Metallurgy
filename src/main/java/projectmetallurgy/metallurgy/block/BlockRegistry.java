@@ -6,8 +6,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import projectmetallurgy.metallurgy.Metallurgy;
 import projectmetallurgy.metallurgy.block.copper.BlockChalcopyrite;
-import projectmetallurgy.metallurgy.block.copper.BlockCopperOre;
 import projectmetallurgy.metallurgy.block.copper.BlockMalachite;
+import projectmetallurgy.metallurgy.block.device.BlockBarrel;
+import projectmetallurgy.metallurgy.block.device.BlockStoneAnvil;
 import projectmetallurgy.metallurgy.block.iron.BlockHematite;
 
 public class BlockRegistry {
@@ -18,4 +19,7 @@ public class BlockRegistry {
     public static final RegistryObject<Block> chalcopyriteBlock = BLOCKS.register("chalcopyrite", BlockChalcopyrite::new);
     public static final RegistryObject<Block> hematiteBlock = BLOCKS.register("hematite", BlockHematite::new);
     public static final RegistryObject<Block> malachiteBlock = BLOCKS.register("malachite", BlockMalachite::new);
+
+    public static final RegistryObject<Block> stoneAnvilBlock = BLOCKS.register("stone_anvil", BlockStoneAnvil::new);
+    public static final RegistryObject<Block> barrelBlock = BLOCKS.register("barrel", BlockBarrel::new);
 }

@@ -5,15 +5,17 @@ import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import projectmetallurgy.metallurgy.Metallurgy;
 import projectmetallurgy.metallurgy.block.iron.BlockHematite;
 import projectmetallurgy.metallurgy.item.raw.ItemRawHematite;
 import projectmetallurgy.metallurgy.item.raw.ItemRawOre;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(value = Dist.CLIENT,modid = Metallurgy.MOD_ID)
 public class RegColor {
 @SubscribeEvent
     public static void reg(ColorHandlerEvent.Item event){

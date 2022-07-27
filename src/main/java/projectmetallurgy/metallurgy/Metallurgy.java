@@ -3,6 +3,7 @@ package projectmetallurgy.metallurgy;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -11,7 +12,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import projectmetallurgy.metallurgy.advanced.DataSupplier;
 import projectmetallurgy.metallurgy.advanced.MetallurgyConfigs;
+import projectmetallurgy.metallurgy.advanced.renderer.StoneAnvilRenderer;
 import projectmetallurgy.metallurgy.block.BlockRegistry;
+import projectmetallurgy.metallurgy.block.blockEntity.BlockEntityRegistry;
 import projectmetallurgy.metallurgy.item.ItemRegistry;
 
 import java.lang.reflect.Field;
@@ -61,7 +64,10 @@ public class Metallurgy {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MetallurgyConfigs.CONFIG_SPEC,"metallurgy-configs.toml");
         BlockRegistry.BLOCKS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
+        BlockEntityRegistry.TILE_ENTITY_TYPES.register(modEventBus);
     }
+
+
     public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException, IllegalAccessException {
         field.setAccessible(true);
         Field modifiersField = Field.class.getDeclaredField("modifiers");

@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.client.model.data.EmptyModelData;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.lwjgl.opengl.GL20;
 import projectmetallurgy.metallurgy.block.blockEntity.StoneAnvilBlockEntity;
 import software.bernie.shadowed.eliotlash.mclib.math.functions.limit.Min;
 
@@ -33,39 +34,18 @@ public class StoneAnvilRenderer implements BlockEntityRenderer<StoneAnvilBlockEn
 
     @Override
     public void render(StoneAnvilBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
-        /*
-        matrixStackIn.push();
-        matrixStackIn.translate(1, 0, 0);
-        BlockRendererDispatcher blockRenderer = Minecraft.getInstance().getBlockRendererDispatcher();
-        BlockState state = Blocks.CHEST.getDefaultState();
-        blockRenderer.renderBlock(state, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, EmptyModelData.INSTANCE);
-        matrixStackIn.pop();
-
-        matrixStackIn.push();
-        matrixStackIn.translate(0, 1, 0);
-        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-        ItemStack stack = new ItemStack(Items.DIAMOND);
-        IBakedModel ibakedmodel = itemRenderer.getItemModelWithOverrides(stack, tileEntityIn.getWorld(), null);
-        itemRenderer.renderItem(stack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
-        matrixStackIn.pop();
-        */
-        /*
-        pPoseStack.pushPose();
-        pPoseStack.translate(1,0,0);
-        BlockEntityRenderDispatcher dispatcher = Minecraft.getInstance().getBlockEntityRenderDispatcher();
-        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-        ItemStack itemStack = new ItemStack(Items.DIAMOND);
-        BakedModel ibakedmodel = itemRenderer.getModel(itemStack, pBlockEntity.getLevel(),null,0);
-        itemRenderer.render(itemStack, ItemTransforms.TransformType.FIXED, true, pPoseStack, pBufferSource, pPackedLight,pPackedOverlay, ibakedmodel);
-        pPoseStack.popPose();
-         */
 
         float scale = 0.3f;
         pPoseStack.pushPose();
-        pPoseStack.translate(0.5f, 1f, 0.5f);
-        pPoseStack.scale(scale, scale, scale);
 
-        Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.GLASS.defaultBlockState(),pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,EmptyModelData.INSTANCE);
+        pPoseStack.translate(0.5f, 0.52f, 0.5f);
+        pPoseStack.mulPose(Vector3f.XN.rotationDegrees(90));
+        pPoseStack.scale(scale, scale, scale);
+        ItemStack stack = new ItemStack(Items.ACACIA_BOAT);
+        BakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, pBlockEntity.getLevel(), null,0);
+        
+        Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.ACACIA_BOAT), ItemTransforms.TransformType.FIXED,true,pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,ibakedmodel);
+        //Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.GLASS.defaultBlockState(),pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,EmptyModelData.INSTANCE);
         pPoseStack.popPose();
     }
 }

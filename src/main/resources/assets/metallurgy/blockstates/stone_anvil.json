@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "": { "model": "metallurgy:block/stone_anvil_model" }
+  },
+  "_comment_": {
+    "facing=north": { "model": "metallurgy:block/stone_anvil_model" },
+    "facing=east": { "model": "metallurgy:block/stone_anvil_model" ,"y": 90},
+    "facing=south": { "model": "metallurgy:block/stone_anvil_model","y": 180 },
+    "facing=west": { "model": "metallurgy:block/stone_anvil_model" ,"y": 270}
+
+  }
+}

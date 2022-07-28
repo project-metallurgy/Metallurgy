@@ -13,10 +13,13 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.*;
 import net.minecraftforge.client.IBlockRenderProperties;
 import net.minecraftforge.client.RenderProperties;
+import net.minecraftforge.common.extensions.IForgeBlock;
 import org.jetbrains.annotations.Nullable;
 import projectmetallurgy.metallurgy.block.blockEntity.StoneAnvilBlockEntity;
 
 public class BlockStoneAnvil extends Block implements EntityBlock {
+
+
 
     public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 8, 16);
 
@@ -24,6 +27,7 @@ public class BlockStoneAnvil extends Block implements EntityBlock {
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;
     }
+
 
     public BlockStoneAnvil() {
         super(BlockBehaviour.Properties.of(Material.STONE).noOcclusion());

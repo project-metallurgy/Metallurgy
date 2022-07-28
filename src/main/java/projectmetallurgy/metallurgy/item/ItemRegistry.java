@@ -12,6 +12,7 @@ import projectmetallurgy.metallurgy.creativeTab.MetallurgyCreativeTab;
 import projectmetallurgy.metallurgy.item.raw.ItemRawChalcopyrite;
 import projectmetallurgy.metallurgy.item.raw.ItemRawHematite;
 import projectmetallurgy.metallurgy.item.raw.ItemRawMalachite;
+import projectmetallurgy.metallurgy.item.tool.ItemStoneHammer;
 
 public class ItemRegistry {
      public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Metallurgy.MOD_ID);
@@ -29,7 +30,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item> copperConcentrate = regBlockItemInMetalTab("copper_concentrate",BlockRegistry.copperConcentrate);
     public static final RegistryObject<Item> copperCalcine = regBlockItemInMetalTab("copper_calcine",BlockRegistry.copperCalcine);
     public static final RegistryObject<Item> chalcopyriteItem = regBlockItemInMetalTab("chalcopyrite",BlockRegistry.chalcopyriteBlock);
-
+    public static final RegistryObject<Item> stoneAnvilItem = regBlockItemInMetalTab("stone_anvil",BlockRegistry.stoneAnvilBlock);
     //
 
      //Item
@@ -37,6 +38,6 @@ public class ItemRegistry {
     public static final RegistryObject<Item> rawHematiteItem = ITEMS.register("raw_hematite_item", ItemRawHematite::new);
     public static final RegistryObject<Item> rawMalachiteItem = ITEMS.register("raw_malachite_item", ItemRawMalachite::new);
     public static final RegistryObject<Item> rawChalcopyriteItem = ITEMS.register("raw_chalcopyrite_item", ItemRawChalcopyrite::new);
-
+    public static final RegistryObject<Item> stoneHammerItem = ITEMS.register("stone_hammer", ItemStoneHammer::new);
     //
  }

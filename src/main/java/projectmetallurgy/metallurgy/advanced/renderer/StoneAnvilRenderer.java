@@ -43,7 +43,7 @@ public class StoneAnvilRenderer implements BlockEntityRenderer<StoneAnvilBlockEn
         pPoseStack.scale(scale, scale, scale);
         ItemStack stack = new ItemStack(Items.ACACIA_BOAT);
         BakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, pBlockEntity.getLevel(), null,0);
-        
+
         Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.ACACIA_BOAT), ItemTransforms.TransformType.FIXED,true,pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,ibakedmodel);
         //Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.GLASS.defaultBlockState(),pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,EmptyModelData.INSTANCE);
         pPoseStack.popPose();

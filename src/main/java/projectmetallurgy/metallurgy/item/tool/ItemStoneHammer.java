@@ -5,6 +5,6 @@ import projectmetallurgy.metallurgy.creativeTab.MetallurgyCreativeTab;
 
 public class ItemStoneHammer extends Item {
     public ItemStoneHammer() {
-        super(new Properties().tab(MetallurgyCreativeTab.metal).durability(75).stacksTo(1));
+        super(new Properties().tab(MetallurgyCreativeTab.metal).durability(75));
     }
 }

@@ -5,6 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
+import org.jetbrains.annotations.NotNull;
 import projectmetallurgy.metallurgy.advanced.MineralAreaData;
 
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class FireValue extends SavedData {
         return data;
     }
 
+    @NotNull
     @Override
     public CompoundTag save(CompoundTag pCompoundTag) {
         pCompoundTag.putInt("fire",this.fire_value);

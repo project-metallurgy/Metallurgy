@@ -102,7 +102,7 @@ public class Ticker {
             }
             fired_value_count.put(p.getUUID(), 0);
             event.getEntity().level.players().forEach((pl) -> {
-                pl.sendMessage(new TextComponent("伟大的" + event.getEntity().getName().getContents() + "传了" + fire_value+ + "点火"), p.getUUID());
+                pl.sendMessage(new TextComponent("伟大的" + event.getEntity().getName().getContents() + "传了" + fire_value + "点火"), p.getUUID());
             });
         }
 

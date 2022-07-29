@@ -12,32 +12,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class FireValue extends SavedData {
+public class FireValue {
+    private static int fireValue = 0;
 
-    private static final String NAME = "FIRE_VALUE";
+    public static void set(int value) {
+        FireValue.fireValue = value;
+    }
 
-    public int fire_value = 0;
-
-    public static FireValue get(Level level){
-        if (level instanceof ServerLevel serverLevel) {
-            return serverLevel.getDataStorage().computeIfAbsent(FireValue::read,FireValue::new,NAME);
+    public static int get() {
+        if (fireValue < 0) {
+            fireValue = 0;
         }
-        else {
-            throw new RuntimeException("Cannot get mineralData from client.");
-        }
+        return fireValue;
     }
-
-    public static FireValue read(CompoundTag tag){
-        FireValue data = new FireValue();
-        data.fire_value = tag.getInt("fire");
-        return data;
-    }
-
-    @NotNull
-    @Override
-    public CompoundTag save(CompoundTag pCompoundTag) {
-        pCompoundTag.putInt("fire",this.fire_value);
-        return pCompoundTag;
-    }
-
 }

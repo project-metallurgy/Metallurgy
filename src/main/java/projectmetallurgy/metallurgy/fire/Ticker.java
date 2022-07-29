@@ -15,10 +15,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Mod.EventBusSubscriber
 public class Ticker {
@@ -26,6 +23,8 @@ public class Ticker {
     public static final Map<UUID, Integer> fired_value_count = new HashMap<>();
     public static final Random random = new Random();
     public static int delay = 0;
+    private static int delayMax = 100;
+    private static boolean state = false;
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
@@ -44,7 +43,7 @@ public class Ticker {
         } else if (event.player.isOnFire() && fired_count.get(uuid) == 5) {
             fired_count.put(uuid, 0);
             fired_value_count.put(uuid, fired_value_count.get(uuid) + 50);
-            FireValue.get(event.player.level).fire_value = FireValue.get(event.player.level).fire_value + 50;
+            FireValue.set(FireValue.get() + 50);
         } else if (!event.player.isOnFire()) {
             fired_value_count.put(uuid, 0);
             fired_count.put(uuid, 0);
@@ -53,24 +52,37 @@ public class Ticker {
 
     @SubscribeEvent
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
-        var fire_value = FireValue.get(event.world).fire_value;
+        var fire_value = FireValue.get();
+        var players = event.world.players();
+        if (players.isEmpty()) return;
         if (event.world.isNight() && fire_value != 0) {
-            FireValue.get(event.world).fire_value -= 1;
+            FireValue.set(FireValue.get() - 1);
             if (event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).get()) return;
             event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(true, event.world.getServer());
+            if (!state) state = true;
         } else if ((event.world.isNight() && fire_value == 0)) {
+            if (!state) state = true;
+            delay += 1;
+            if (delay == delayMax) {
+                delay = 0;
+                players.forEach((p) -> {
+                    p.sendMessage(new TextComponent("火已渐熄，然位不见王影"), p.getUUID());
+                });
+                if (delayMax<400){
+                    delayMax += 100;
+                }
+            }
             if (!event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).get()) return;
             event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(false, event.world.getServer());
-            delay += 1;
-            if (delay == 1000) {
-                delay = 0;
-                var server = event.world.getServer();
-                if (server == null) return;
-                server.sendMessage(new TextComponent("火已渐熄，然位不见王影，请献祭具有经验值的薪王"), UUID.randomUUID());
-            }
             //new MinecraftServer().getCommands().performCommand(CommandSourceStack.ERROR_NOT_PLAYER,"./")
         } else if (event.world.isDay()) {
-            FireValue.get(event.world).fire_value = 0;
+            FireValue.set(0);
+            if (state) {
+                players.forEach((p) -> {
+                    p.sendMessage(new TextComponent("火之时代被延长了……"), p.getUUID());
+                });
+                state = false;
+            }
             if (event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).get()) return;
             event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(true, event.world.getServer());
         }
@@ -79,13 +91,19 @@ public class Ticker {
 
     @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {
-        if (event.getEntity() instanceof Player) {
-            int fire_value = fired_value_count.get(event.getEntity().getUUID());
-            FireValue.get(event.getEntity().level).fire_value += fired_value_count.get(event.getEntity().getUUID()) + ((Player) event.getEntity()).totalExperience * 25;
-            fired_value_count.put(event.getEntity().getUUID(), 0);
-            var server = event.getEntity().level.getServer();
-            if (server == null) return;
-            server.sendMessage(new TextComponent("伟大的" + event.getEntity().getName().getContents() + "传了" + fire_value + "点火"), event.getEntity().getUUID());
+        if (event.getEntity() instanceof Player p) {
+            int fire_value = fired_value_count.get(p.getUUID());
+            var exp = p.totalExperience * 25;
+            if (exp<0){
+                exp = 1000;
+            }
+            if (event.getSource().isFire()){
+                FireValue.set(FireValue.get() + fired_value_count.get(p.getUUID()) + exp);
+            }
+            fired_value_count.put(p.getUUID(), 0);
+            event.getEntity().level.players().forEach((pl) -> {
+                pl.sendMessage(new TextComponent("伟大的" + event.getEntity().getName().getContents() + "传了" + fire_value+ + "点火"), p.getUUID());
+            });
         }
 
     }

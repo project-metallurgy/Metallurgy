@@ -53,6 +53,7 @@ public class Ticker {
                 fired_value_count.put(uuid, 0);
                 fired_count.put(uuid, 0);
             }
+            isPlayerTicked =true;
         }
         catch (Exception e){
             if (event.player.getName().getContents().equals("Draming")){

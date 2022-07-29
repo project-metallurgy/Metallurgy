@@ -59,6 +59,9 @@ public class Ticker {
         var fire_value = FireValue.get();
         var players = event.world.players();
         var time = event.world.getDayTime() % 24000L;
+        if (!event.world.getGameRules().getRule(GameRules.RULE_SHOWDEATHMESSAGES).get()) {
+            event.world.getGameRules().getRule(GameRules.RULE_SHOWDEATHMESSAGES).set(true, event.world.getServer());
+        }
         if (players.isEmpty()) return;
         if (time > 18000 && time < 22000 && fire_value != 0) {
             FireValue.set(FireValue.get() - 1);
@@ -90,7 +93,7 @@ public class Ticker {
                     int max = 0;
                     UUID maxid = null;
                     for (Map.Entry<UUID, Integer> e : fired_value_count.entrySet()) {
-                        if (max < e.getValue()) {
+                        if (max <= e.getValue()) {
                             max = e.getValue();
                             maxid = e.getKey();
                         }
@@ -124,14 +127,15 @@ public class Ticker {
             }
             var exp = p.totalExperience * 25;
             if (exp < 0) {
-                exp = 1000;
+                exp = 0;
             }
             FireValue.set(FireValue.get() + fired_value_count.get(p.getUUID()) + exp);
 
-            fired_value_count.put(p.getUUID(), 0);
+            fired_value_count.put(p.getUUID(), fired_value_count.get(p.getUUID()) + exp);
             event.getEntity().level.players().forEach((pl) -> {
                 pl.sendMessage(new TextComponent(event.getEntity().getName().getContents() + "投入了初始之火"), p.getUUID());
             });
+            p.level.getGameRules().getRule(GameRules.RULE_SHOWDEATHMESSAGES).set(false, event.getEntity().getServer());
         }
 
     }

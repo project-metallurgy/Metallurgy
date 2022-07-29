@@ -55,12 +55,12 @@ public class Ticker {
         var fire_value = FireValue.get();
         var players = event.world.players();
         if (players.isEmpty()) return;
-        if (event.world.isNight() && fire_value != 0) {
+        if (event.world.getDayTime() % 24000L > 18000 && fire_value != 0) {
             FireValue.set(FireValue.get() - 1);
             if (event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).get()) return;
             event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(true, event.world.getServer());
             if (!state) state = true;
-        } else if ((event.world.isNight() && fire_value == 0)) {
+        } else if ((event.world.getDayTime() % 24000L > 18000  && fire_value == 0)) {
             if (!state) state = true;
             delay += 1;
             if (delay == delayMax) {
@@ -68,7 +68,7 @@ public class Ticker {
                 players.forEach((p) -> {
                     p.sendMessage(new TextComponent("火已渐熄，然位不见王影"), p.getUUID());
                 });
-                if (delayMax<400){
+                if (delayMax < 400) {
                     delayMax += 100;
                 }
             }
@@ -94,10 +94,10 @@ public class Ticker {
         if (event.getEntity() instanceof Player p) {
             int fire_value = fired_value_count.get(p.getUUID());
             var exp = p.totalExperience * 25;
-            if (exp<0){
+            if (exp < 0) {
                 exp = 1000;
             }
-            if (event.getSource().isFire()){
+            if (event.getSource().isFire()) {
                 FireValue.set(FireValue.get() + fired_value_count.get(p.getUUID()) + exp);
             }
             fired_value_count.put(p.getUUID(), 0);

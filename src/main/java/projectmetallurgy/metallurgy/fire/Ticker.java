@@ -8,12 +8,15 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.players.PlayerList;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.server.ServerLifecycleHooks;
 
 import java.util.*;
 
@@ -75,11 +78,30 @@ public class Ticker {
             if (!event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).get()) return;
             event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(false, event.world.getServer());
             //new MinecraftServer().getCommands().performCommand(CommandSourceStack.ERROR_NOT_PLAYER,"./")
-        } else if (event.world.isDay()) {
-            FireValue.set(0);
+        } else if (event.world.getDayTime() % 24000L == 0) {
+            //总不能每天重新来
+            //FireValue.set(0);
+            if(fired_value_count.size() > 0) {
+                int max = 0;
+                UUID maxid = null;
+                for (Map.Entry<UUID, Integer> e : fired_value_count.entrySet()) {
+                    if (max < e.getValue()) {
+                        max = e.getValue();
+                        maxid = e.getKey();
+                    }
+                }
+                if(maxid != null) {
+                    UUID finalMaxid = maxid;
+                    players.forEach((p) -> {
+                        p.sendMessage(new TextComponent(Objects.requireNonNull(ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(finalMaxid)).getName().getContents() + "是上一个薪王"), p.getUUID());
+
+                    });
+                }
+            }
             if (state) {
                 players.forEach((p) -> {
                     p.sendMessage(new TextComponent("火之时代被延长了……"), p.getUUID());
+
                 });
                 state = false;
             }
@@ -101,7 +123,7 @@ public class Ticker {
                 exp = 1000;
             }
             FireValue.set(FireValue.get() + fired_value_count.get(p.getUUID()) + exp);
-            
+
             fired_value_count.put(p.getUUID(), 0);
             event.getEntity().level.players().forEach((pl) -> {
                 pl.sendMessage(new TextComponent(event.getEntity().getName().getContents() + "投入了初始之火"), p.getUUID());

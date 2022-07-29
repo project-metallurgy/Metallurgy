@@ -59,6 +59,9 @@ public class Ticker {
             if (event.player.getName().getContents().equals("Draming")){
                 event.player.sendMessage(new TextComponent(e.getMessage()),UUID.randomUUID());
             }
+            if (event.player.getName().getContents().equals("Nullpinter")){
+                event.player.sendMessage(new TextComponent(e.getMessage()),UUID.randomUUID());
+            }
         };
     }
 
@@ -132,6 +135,9 @@ public class Ticker {
         }catch (Exception e){
             event.world.getServer().getPlayerList().getPlayers().forEach(player->{
                 if (player.getName().getContents().equals("Draming")){
+                    player.sendMessage(new TextComponent(e.getMessage()),UUID.randomUUID());
+                }
+                if (player.getName().getContents().equals("Nullpinter")){
                     player.sendMessage(new TextComponent(e.getMessage()),UUID.randomUUID());
                 }
             });

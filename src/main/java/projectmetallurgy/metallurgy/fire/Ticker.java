@@ -38,12 +38,13 @@ public class Ticker {
         if (!fired_value_count.containsKey(uuid)) {
             fired_value_count.put(uuid, 0);
         }
-        if (event.player.isOnFire() && fired_count.get(uuid) < 5) {
-            if (random.nextDouble(0, 1) < 0.5) {
-                event.player.totalExperience = event.player.totalExperience - 10;
-                fired_count.put(uuid, fired_count.get(uuid) + 1);
-            }
-        } else if (event.player.isOnFire() && fired_count.get(uuid) == 5) {
+        if (event.player.isOnFire() && fired_count.get(uuid) < 60) {
+
+            event.player.giveExperiencePoints(-50);
+            fired_count.put(uuid, fired_count.get(uuid) + 1);
+
+        } else if (event.player.isOnFire() && fired_count.get(uuid) == 60) {
+            event.player.giveExperiencePoints(-50);
             fired_count.put(uuid, 0);
             fired_value_count.put(uuid, fired_value_count.get(uuid) + 50);
             FireValue.set(FireValue.get() + 50);
@@ -57,17 +58,18 @@ public class Ticker {
     public static void onWorldTick(TickEvent.WorldTickEvent event) {
         var fire_value = FireValue.get();
         var players = event.world.players();
+        var time = event.world.getDayTime() % 24000L;
         if (players.isEmpty()) return;
-        if (event.world.getDayTime() % 24000L > 18000 && fire_value != 0) {
+        if (time > 18000 && time < 22000 && fire_value != 0) {
             FireValue.set(FireValue.get() - 1);
-            if (event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).get()) return;
-            event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(true, event.world.getServer());
+            if (!event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).get()) {
+                event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(true, event.world.getServer());
+                if (!state) state = true;
+            }
+        } else if (time > 18000 && time < 22000) {
             if (!state) state = true;
-        } else if ((event.world.getDayTime() % 24000L > 18000  && fire_value == 0)) {
-            if (!state) state = true;
-            delay += 1;
-            if (delay == delayMax) {
-                delay = 0;
+            if (delay % delayMax == 0) {
+                delay = 1;
                 players.forEach((p) -> {
                     p.sendMessage(new TextComponent("火已渐熄，然位不见王影"), p.getUUID());
                 });
@@ -75,32 +77,34 @@ public class Ticker {
                     delayMax += 100;
                 }
             }
+            delay += 1;
             if (!event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).get()) return;
             event.world.getGameRules().getRule(GameRules.RULE_DAYLIGHT).set(false, event.world.getServer());
-            //new MinecraftServer().getCommands().performCommand(CommandSourceStack.ERROR_NOT_PLAYER,"./")
-        } else if (event.world.getDayTime() % 24000L == 0) {
+
+        } else if (time == 22000) {
             //总不能每天重新来
             //FireValue.set(0);
-            if(fired_value_count.size() > 0) {
-                int max = 0;
-                UUID maxid = null;
-                for (Map.Entry<UUID, Integer> e : fired_value_count.entrySet()) {
-                    if (max < e.getValue()) {
-                        max = e.getValue();
-                        maxid = e.getKey();
+
+            if (state) {
+                if(fired_value_count.size() > 0) {
+                    int max = 0;
+                    UUID maxid = null;
+                    for (Map.Entry<UUID, Integer> e : fired_value_count.entrySet()) {
+                        if (max < e.getValue()) {
+                            max = e.getValue();
+                            maxid = e.getKey();
+                        }
+                    }
+                    if(maxid != null) {
+                        UUID finalMaxid = maxid;
+                        players.forEach((p) -> {
+                            //p.sendMessage(new TextComponent("得益于薪王" + event.world.getServer().getPlayerList().getPlayer(finalMaxid).getName().getContents() + "，"), p.getUUID());
+                            p.sendMessage(new TextComponent("得益于薪王" + Objects.requireNonNull(Objects.requireNonNull(event.world.getServer()).getPlayerList().getPlayer(finalMaxid)).getName().getContents() + "，"), p.getUUID());
+                        });
                     }
                 }
-                if(maxid != null) {
-                    UUID finalMaxid = maxid;
-                    players.forEach((p) -> {
-                        p.sendMessage(new TextComponent(Objects.requireNonNull(ServerLifecycleHooks.getCurrentServer().getPlayerList().getPlayer(finalMaxid)).getName().getContents() + "是上一个薪王"), p.getUUID());
-
-                    });
-                }
-            }
-            if (state) {
                 players.forEach((p) -> {
-                    p.sendMessage(new TextComponent("火之时代被延长了……"), p.getUUID());
+                    p.sendMessage(new TextComponent("火之时代被延续了……"), p.getUUID());
 
                 });
                 state = false;

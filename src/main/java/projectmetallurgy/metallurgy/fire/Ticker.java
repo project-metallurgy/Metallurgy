@@ -23,7 +23,7 @@ public class Ticker {
     public static final Map<UUID, Integer> fired_value_count = new HashMap<>();
     public static final Random random = new Random();
     public static int delay = 0;
-    private static int delayMax = 100;
+    private static int delayMax = 6000;
     private static boolean state = false;
 
     @SubscribeEvent
@@ -91,15 +91,17 @@ public class Ticker {
 
     @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {
-        if (event.getEntity() instanceof Player p && p.isOnFire()) {
-            int fire_value = fired_value_count.get(p.getUUID());
+        if (event.getEntity() instanceof Player p) {
+
+            if (!event.getSource().isFire()) {
+                return;
+            }
             var exp = p.totalExperience * 25;
             if (exp < 0) {
                 exp = 1000;
             }
-            if (event.getSource().isFire()) {
-                FireValue.set(FireValue.get() + fired_value_count.get(p.getUUID()) + exp);
-            }
+            FireValue.set(FireValue.get() + fired_value_count.get(p.getUUID()) + exp);
+            
             fired_value_count.put(p.getUUID(), 0);
             event.getEntity().level.players().forEach((pl) -> {
                 pl.sendMessage(new TextComponent(event.getEntity().getName().getContents() + "投入了初始之火"), p.getUUID());

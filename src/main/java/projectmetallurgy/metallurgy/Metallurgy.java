@@ -23,6 +23,7 @@ import java.util.Random;
 
 @Mod(Metallurgy.MOD_ID)
 public class Metallurgy {
+
     public static final String MOD_ID = "metallurgy";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final Codec<OreConfiguration> CODEC = RecordCodecBuilder.create((p_67849_)

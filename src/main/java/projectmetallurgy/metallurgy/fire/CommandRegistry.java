@@ -7,6 +7,8 @@ import net.minecraftforge.client.event.RegisterClientCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.UUID;
+
 @Mod.EventBusSubscriber
 public class CommandRegistry {
 
@@ -17,6 +19,9 @@ public class CommandRegistry {
             return 1;
         }))).then(Commands.literal("get").executes(ctx -> {
             ctx.getSource().sendSuccess(new TextComponent(FireValue.get()+""), false);
+            return 1;
+        })).then(Commands.literal("tickCheck").executes(ctx->{
+            ctx.getSource().sendSuccess(new TextComponent("world: "+Ticker.isWorldTicked+" player: "+Ticker.isPlayerTicked), false);
             return 1;
         })));
     }

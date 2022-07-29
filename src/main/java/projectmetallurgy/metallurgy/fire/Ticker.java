@@ -91,7 +91,7 @@ public class Ticker {
 
     @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {
-        if (event.getEntity() instanceof Player p) {
+        if (event.getEntity() instanceof Player p && p.isOnFire()) {
             int fire_value = fired_value_count.get(p.getUUID());
             var exp = p.totalExperience * 25;
             if (exp < 0) {

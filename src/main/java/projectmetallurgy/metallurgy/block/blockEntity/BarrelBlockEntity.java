@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.UUID;
 
 
-public class BarrelBlockEntity extends BlockEntity implements BlockEntityTicker {
+public class BarrelBlockEntity extends BlockEntity{
 
     public BarrelBlockEntity( BlockPos pWorldPosition, BlockState pBlockState) {
         super(BlockEntityRegistry.BARREL_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);

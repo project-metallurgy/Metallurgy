@@ -13,6 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class StoneAnvilBlockEntity extends BlockEntity {
     public Item itemPlacedOn= Items.AIR;
+    public CompoundTag tag = new CompoundTag();
     public int clickCount = 0;
     public StoneAnvilBlockEntity( BlockPos pWorldPosition, BlockState pBlockState) {
         super(BlockEntityRegistry.STONE_ANVIL_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
@@ -24,6 +25,7 @@ public class StoneAnvilBlockEntity extends BlockEntity {
         String path = this.itemPlacedOn.getRegistryName().getPath();
         CompoundTag tag =new CompoundTag();
         if (namespace!=null) {
+            tag.put("tag",this.tag);
             String name = namespace+":"+path;
             tag.putString("item",name);
             tag.putInt("click_count",this.clickCount);
@@ -36,6 +38,7 @@ public class StoneAnvilBlockEntity extends BlockEntity {
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
+        this.tag = (CompoundTag) nbt.get("tag");
         this.clickCount = nbt.getInt("click_count");
         this.itemPlacedOn = ForgeRegistries.ITEMS.getValue(new ResourceLocation(nbt.getString("item")));
     }

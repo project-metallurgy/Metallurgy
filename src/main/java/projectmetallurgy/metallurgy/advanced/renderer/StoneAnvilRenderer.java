@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.AirItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.AirBlock;
@@ -41,10 +42,9 @@ public class StoneAnvilRenderer implements BlockEntityRenderer<StoneAnvilBlockEn
         pPoseStack.translate(0.5f, 0.52f, 0.5f);
         pPoseStack.mulPose(Vector3f.XN.rotationDegrees(90));
         pPoseStack.scale(scale, scale, scale);
-        ItemStack stack = new ItemStack(Items.ACACIA_BOAT);
+        ItemStack stack = new ItemStack(pBlockEntity.itemPlacedOn);
         BakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, pBlockEntity.getLevel(), null,0);
-
-        Minecraft.getInstance().getItemRenderer().render(new ItemStack(Items.ACACIA_BOAT), ItemTransforms.TransformType.FIXED,true,pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,ibakedmodel);
+        Minecraft.getInstance().getItemRenderer().render(stack, ItemTransforms.TransformType.FIXED,true,pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,ibakedmodel);
         //Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.GLASS.defaultBlockState(),pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,EmptyModelData.INSTANCE);
         pPoseStack.popPose();
     }

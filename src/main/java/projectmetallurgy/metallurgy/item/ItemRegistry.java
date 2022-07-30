@@ -33,6 +33,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item> hematiteItem = regBlockItemInMetalTab("hematite",BlockRegistry.hematiteBlock);
     public static final RegistryObject<Item> malachiteItem = regBlockItemInMetalTab("malachite",BlockRegistry.malachiteBlock);
     public static final RegistryObject<Item> stoneAnvilItem = regBlockItemInMetalTab("stone_anvil",BlockRegistry.stoneAnvilBlock);
+    public static final RegistryObject<Item> mortarAnvilItem = regBlockItemInMetalTab("mortar",BlockRegistry.mortarBlock);
     //
 
      //Item

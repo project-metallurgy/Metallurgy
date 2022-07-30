@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidAttributes;
+import org.jetbrains.annotations.NotNull;
 import org.jline.utils.Colors;
 import org.lwjgl.opengl.GL11;
 import projectmetallurgy.metallurgy.block.blockEntity.BarrelBlockEntity;
@@ -26,9 +27,9 @@ import projectmetallurgy.metallurgy.block.blockEntity.BarrelBlockEntity;
 import java.awt.image.PackedColorModel;
 
 public class BarrelRender  implements BlockEntityRenderer<BarrelBlockEntity> {
-
+    
     @Override
-    public void render(BarrelBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
+    public void render(@NotNull BarrelBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
 
         Minecraft minecraft =  Minecraft.getInstance();
         Matrix4f matrix4f = pPoseStack.last().pose();

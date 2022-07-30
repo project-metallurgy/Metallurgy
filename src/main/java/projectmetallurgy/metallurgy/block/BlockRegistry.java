@@ -8,6 +8,7 @@ import projectmetallurgy.metallurgy.Metallurgy;
 import projectmetallurgy.metallurgy.block.copper.BlockChalcopyrite;
 import projectmetallurgy.metallurgy.block.copper.BlockMalachite;
 import projectmetallurgy.metallurgy.block.device.BlockBarrel;
+import projectmetallurgy.metallurgy.block.device.BlockMortar;
 import projectmetallurgy.metallurgy.block.device.BlockStoneAnvil;
 import projectmetallurgy.metallurgy.block.iron.BlockHematite;
 
@@ -22,4 +23,5 @@ public class BlockRegistry {
 
     public static final RegistryObject<Block> stoneAnvilBlock = BLOCKS.register("stone_anvil", BlockStoneAnvil::new);
     public static final RegistryObject<Block> barrelBlock = BLOCKS.register("barrel", BlockBarrel::new);
+    public static final RegistryObject<Block> mortarBlock = BLOCKS.register("mortar", BlockMortar::new);
 }

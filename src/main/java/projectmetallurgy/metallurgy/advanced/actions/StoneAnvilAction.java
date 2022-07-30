@@ -1,18 +1,24 @@
 package projectmetallurgy.metallurgy.advanced.actions;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import projectmetallurgy.metallurgy.block.MetaOre;
 import projectmetallurgy.metallurgy.block.blockEntity.StoneAnvilBlockEntity;
 import projectmetallurgy.metallurgy.item.ItemRegistry;
 import projectmetallurgy.metallurgy.item.raw.ItemRawOre;
+import projectmetallurgy.metallurgy.item.tag.MetallurgyItemTags;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,6 +64,25 @@ public class StoneAnvilAction {
                 event.getWorld().addFreshEntity(new ItemEntity(event.getWorld(), pos.getX(), pos.getY(), pos.getZ(), itemStack2Give));
             }
             passed.put(event.getPlayer(), false);
-
     }
+
+    @SubscribeEvent
+    public static void onAnvilWorking (PlayerInteractEvent.RightClickBlock event){
+        boolean isRightTool =  Registry.ITEM.getHolderOrThrow(Registry.ITEM.getResourceKey(event.getItemStack().getItem()).get()).is(MetallurgyItemTags.HAMMERS);
+        if (isRightTool){
+            StoneAnvilBlockEntity stoneAnvilBlockEntity = (StoneAnvilBlockEntity) event.getWorld().getBlockEntity(event.getPos());
+            ItemStack hammer = event.getItemStack();
+            if (stoneAnvilBlockEntity != null && stoneAnvilBlockEntity.itemPlacedOn instanceof ItemRawOre) {
+                if (stoneAnvilBlockEntity.clickCount<1){
+                    stoneAnvilBlockEntity.clickCount+=1;
+                    hammer.setDamageValue(hammer.getDamageValue()-1);
+                }
+                else {
+
+                }
+            }
+
+        }
+    }
+
 }

@@ -47,6 +47,7 @@ public class StoneAnvilBlockEntity extends BlockEntity {
         this.clickCount = nbt.getInt("click_count");
         this.itemPlacedOn = ForgeRegistries.ITEMS.getValue(new ResourceLocation(nbt.getString("item")));
     }
+    /*
 
     @Nullable
     @Override
@@ -80,7 +81,10 @@ public class StoneAnvilBlockEntity extends BlockEntity {
 
     @Override
     public void handleUpdateTag(CompoundTag tag) {
+        this.clickCount = tag.getInt("click_count");
         this.tag = (CompoundTag) tag.get("tag");
         this.itemPlacedOn = ForgeRegistries.ITEMS.getValue(new ResourceLocation(tag.getString("item")));
     }
+
+     */
 }

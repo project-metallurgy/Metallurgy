@@ -30,7 +30,7 @@ public class BlockStoneAnvil extends Block implements EntityBlock {
 
 
     public BlockStoneAnvil() {
-        super(BlockBehaviour.Properties.of(Material.STONE).noOcclusion());
+        super(BlockBehaviour.Properties.of(Material.STONE).noOcclusion().destroyTime(50));
     }
     @Nullable
     @Override

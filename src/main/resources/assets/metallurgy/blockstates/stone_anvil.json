@@ -1,12 +1,12 @@
 {
   "variants": {
-    "": { "model": "metallurgy:block/stone_anvil_model" }
+    "": { "model": "metallurgy:block/stone_anvil" }
   },
   "_comment_": {
-    "facing=north": { "model": "metallurgy:block/stone_anvil_model" },
-    "facing=east": { "model": "metallurgy:block/stone_anvil_model" ,"y": 90},
-    "facing=south": { "model": "metallurgy:block/stone_anvil_model","y": 180 },
-    "facing=west": { "model": "metallurgy:block/stone_anvil_model" ,"y": 270}
+    "facing=north": { "model": "metallurgy:block/stone_anvil" },
+    "facing=east": { "model": "metallurgy:block/stone_anvil" ,"y": 90},
+    "facing=south": { "model": "metallurgy:block/stone_anvil","y": 180 },
+    "facing=west": { "model": "metallurgy:block/stone_anvil" ,"y": 270}
 
   }
 }

@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "metallurgy:block/hematite_block_model" }
+    "": { "model": "metallurgy:block/hematite" }
   }
 }

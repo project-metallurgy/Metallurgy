@@ -25,59 +25,55 @@ import java.util.Map;
 
 @Mod.EventBusSubscriber
 public class StoneAnvilAction {
-    public static Map<Player,Boolean> passed = new HashMap<>();
+    public static Map<Player, Boolean> passed = new HashMap<>();
 
     @SubscribeEvent
-    public static void onPlaceOreOnTheAnvil(PlayerInteractEvent.RightClickBlock event){
-        //if (!event.getWorld().isClientSide){
-            passed.putIfAbsent(event.getPlayer(), false);
-            if (! passed.get(event.getPlayer())) {
-                passed.put(event.getPlayer(), true);
-                return;
-            }
-            if (event.getPlayer().getMainHandItem().getItem() instanceof ItemRawOre && event.getWorld().getBlockEntity(event.getPos()) instanceof StoneAnvilBlockEntity) {
-                StoneAnvilBlockEntity anvil = (StoneAnvilBlockEntity) event.getWorld().getBlockEntity(event.getPos());
-                Player player = event.getPlayer();
-                ItemStack itemStack = player.getMainHandItem();
-                if (anvil.itemPlacedOn != Items.AIR) {
-                    BlockPos pos = event.getPos();
-                    ItemStack item2drop = new ItemStack(anvil.itemPlacedOn);
-                    item2drop.setTag(anvil.tag);
-                    event.getWorld().addFreshEntity(new ItemEntity(event.getWorld(), pos.getX(), pos.getY(), pos.getZ(), item2drop));
-                }
-                anvil.tag = itemStack.getTag();
-                anvil.itemPlacedOn = itemStack.getItem();
-                itemStack.setCount(itemStack.getCount() - 1);
-
-            }else
-
-            if (event.getPlayer().getMainHandItem().is(Items.AIR) && event.getWorld().getBlockEntity(event.getPos()) instanceof StoneAnvilBlockEntity) {
-                StoneAnvilBlockEntity anvil = (StoneAnvilBlockEntity) event.getWorld().getBlockEntity(event.getPos());
-                Player player = event.getPlayer();
-                ItemStack itemStack2Give = new ItemStack(anvil.itemPlacedOn);
-                if (!itemStack2Give.is(Items.AIR)) {
-                    itemStack2Give.setTag(anvil.tag);
-                }
+    public static void onPlaceOreOnTheAnvil(PlayerInteractEvent.RightClickBlock event) {
+        passed.putIfAbsent(event.getPlayer(), false);
+        if (!passed.get(event.getPlayer())) {
+            passed.put(event.getPlayer(), true);
+            return;
+        }
+        if (event.getPlayer().getMainHandItem().getItem() instanceof ItemRawOre
+                && event.getWorld().getBlockEntity(event.getPos()) instanceof StoneAnvilBlockEntity
+                anvil) {
+            Player player = event.getPlayer();
+            ItemStack itemStack = player.getMainHandItem();
+            if (anvil.itemPlacedOn != Items.AIR) {
                 BlockPos pos = event.getPos();
-                anvil.itemPlacedOn=Items.AIR;
-                anvil.tag=new CompoundTag();
-                event.getWorld().addFreshEntity(new ItemEntity(event.getWorld(), pos.getX(), pos.getY(), pos.getZ(), itemStack2Give));
+                ItemStack item2drop = new ItemStack(anvil.itemPlacedOn);
+                item2drop.setTag(anvil.tag);
+                event.getWorld().addFreshEntity(new ItemEntity(event.getWorld(), pos.getX(), pos.getY(), pos.getZ(), item2drop));
             }
-            passed.put(event.getPlayer(), false);
+            anvil.tag = itemStack.getTag();
+            anvil.itemPlacedOn = itemStack.getItem();
+            itemStack.setCount(itemStack.getCount() - 1);
+        } else if (event.getPlayer().getMainHandItem().is(Items.AIR)
+                && event.getWorld().getBlockEntity(event.getPos()) instanceof StoneAnvilBlockEntity
+                anvil) {
+            ItemStack itemStack2Give = new ItemStack(anvil.itemPlacedOn);
+            if (!itemStack2Give.is(Items.AIR)) {
+                itemStack2Give.setTag(anvil.tag);
+            }
+            BlockPos pos = event.getPos();
+            anvil.itemPlacedOn = Items.AIR;
+            anvil.tag = new CompoundTag();
+            event.getWorld().addFreshEntity(new ItemEntity(event.getWorld(), pos.getX(), pos.getY(), pos.getZ(), itemStack2Give));
+        }
+        passed.put(event.getPlayer(), false);
     }
 
     @SubscribeEvent
-    public static void onAnvilWorking (PlayerInteractEvent.RightClickBlock event){
-        boolean isRightTool =  Registry.ITEM.getHolderOrThrow(Registry.ITEM.getResourceKey(event.getItemStack().getItem()).get()).is(MetallurgyItemTags.HAMMERS);
-        if (isRightTool){
+    public static void onAnvilWorking(PlayerInteractEvent.RightClickBlock event) {
+        boolean isRightTool = Registry.ITEM.getHolderOrThrow(Registry.ITEM.getResourceKey(event.getItemStack().getItem()).get()).is(MetallurgyItemTags.HAMMERS);
+        if (isRightTool) {
             StoneAnvilBlockEntity stoneAnvilBlockEntity = (StoneAnvilBlockEntity) event.getWorld().getBlockEntity(event.getPos());
             ItemStack hammer = event.getItemStack();
             if (stoneAnvilBlockEntity != null && stoneAnvilBlockEntity.itemPlacedOn instanceof ItemRawOre) {
-                if (stoneAnvilBlockEntity.clickCount<1){
-                    stoneAnvilBlockEntity.clickCount+=1;
-                    hammer.setDamageValue(hammer.getDamageValue()-1);
-                }
-                else {
+                if (stoneAnvilBlockEntity.clickCount < 1) {
+                    stoneAnvilBlockEntity.clickCount += 1;
+                    hammer.setDamageValue(hammer.getDamageValue() - 1);
+                } else {
 
                 }
             }

@@ -30,6 +30,8 @@ public class ItemRegistry {
     public static final RegistryObject<Item> copperConcentrate = regBlockItemInMetalTab("copper_concentrate",BlockRegistry.copperConcentrate);
     public static final RegistryObject<Item> copperCalcine = regBlockItemInMetalTab("copper_calcine",BlockRegistry.copperCalcine);
     public static final RegistryObject<Item> chalcopyriteItem = regBlockItemInMetalTab("chalcopyrite",BlockRegistry.chalcopyriteBlock);
+    public static final RegistryObject<Item> hematiteItem = regBlockItemInMetalTab("hematite",BlockRegistry.hematiteBlock);
+    public static final RegistryObject<Item> malachiteItem = regBlockItemInMetalTab("malachite",BlockRegistry.malachiteBlock);
     public static final RegistryObject<Item> stoneAnvilItem = regBlockItemInMetalTab("stone_anvil",BlockRegistry.stoneAnvilBlock);
     //
 

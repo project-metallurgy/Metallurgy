@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "metallurgy:block/chalcopyrite_block_model" }
+    "": { "model": "metallurgy:block/chalcopyrite" }
   }
 }

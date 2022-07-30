@@ -1,6 +1,5 @@
 package projectmetallurgy.metallurgy.block.blockEntity;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -11,34 +10,32 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class StoneAnvilBlockEntity extends BlockEntity {
-    public Item itemPlacedOn= Items.AIR;
+    public Item itemPlacedOn = Items.AIR;
     public CompoundTag tag = new CompoundTag();
     public int clickCount = 0;
-    public StoneAnvilBlockEntity( BlockPos pWorldPosition, BlockState pBlockState) {
+
+    public StoneAnvilBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(BlockEntityRegistry.STONE_ANVIL_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
     }
 
     @Override
     public CompoundTag serializeNBT() {
-        String namespace = this.itemPlacedOn.getRegistryName().getNamespace();
-        String path = this.itemPlacedOn.getRegistryName().getPath();
-        CompoundTag tag =new CompoundTag();
-        if (namespace!=null) {
-            tag.put("tag",this.tag);
-            String name = namespace+":"+path;
-            tag.putString("item",name);
-            tag.putInt("click_count",this.clickCount);
-            return tag;
-        }
-        else {
-            return null;
-        }
+        var registryName = this.itemPlacedOn.getRegistryName();
+        if (registryName == null) return null;
+        var namespace = registryName.getNamespace();
+        var path = registryName.getPath();
+        CompoundTag tag = new CompoundTag();
+        tag.put("tag", this.tag);
+        String name = String.format("%s:%s", namespace, path);
+        tag.putString("item", name);
+        tag.putInt("click_count", this.clickCount);
+        return tag;
     }
 
     @Override
@@ -57,26 +54,24 @@ public class StoneAnvilBlockEntity extends BlockEntity {
 
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        if (pkt.getTag()!=null) {
+        if (pkt.getTag() != null) {
             handleUpdateTag(pkt.getTag());
         }
     }
 
+    @NotNull
     @Override
     public CompoundTag getUpdateTag() {
-        CompoundTag tag = super.getUpdateTag();
-        String namespace = this.itemPlacedOn.getRegistryName().getNamespace();
-        String path = this.itemPlacedOn.getRegistryName().getPath();
-        if (namespace!=null) {
-            tag.put("tag",this.tag);
-            String name = namespace+":"+path;
-            tag.putString("item",name);
-            tag.putInt("click_count",this.clickCount);
-            return tag;
-        }
-        else {
-            return null;
-        }
+        var tag = super.getUpdateTag();
+        var registryName = this.itemPlacedOn.getRegistryName();
+        if (registryName == null) return tag;
+        var namespace = registryName.getNamespace();
+        var path = registryName.getPath();
+        tag.put("tag", this.tag);
+        String name = String.format("%s:%s", namespace, path);
+        tag.putString("item", name);
+        tag.putInt("click_count", this.clickCount);
+        return tag;
     }
 
     @Override

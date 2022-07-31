@@ -19,6 +19,7 @@ import projectmetallurgy.metallurgy.item.raw.ItemRawOre;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = Metallurgy.MOD_ID)
@@ -30,25 +31,23 @@ public class DataSupplier {
         addTagSupplier(ItemRawChalcopyrite.class, BlockChalcopyrite::genTag);
         addTagSupplier(ItemRawMalachite.class,BlockMalachite::genTag);
         addTagSupplier(ItemRawHematite.class, BlockHematite::genTag);
+
+
     }
 
-
+    //OnDigging
     public static Map<Class<? extends ItemRawOre>, Supplier<CompoundTag>> tagSuppliers = new HashMap<>();
 
     public static void addTagSupplier(Class<?extends ItemRawOre> rawOre, Supplier<CompoundTag> tagSupplier){
         tagSuppliers.put(rawOre,tagSupplier);
     }
+    //
 
-    public static double doubleWithOffset(double base, double offsetBound){
-        Random random = new Random();
-        double offsetLength = random.nextDouble(-offsetBound,offsetBound);
-        return base+offsetLength;
+    //Crush
+    public static Map<Class<? extends ItemRawOre>, Function<CompoundTag,CompoundTag>> crushProcessors = new HashMap<>();
+
+    public static void addCrushProcessor(Class<?extends ItemRawOre> rawOre, Function<CompoundTag,CompoundTag> crushProcessor){
+        crushProcessors.put(rawOre,crushProcessor);
     }
-
-    public static int intWithOffset(int base, int offsetBound){
-        Random random = new Random();
-        int offsetLength = random.nextInt(-offsetBound,offsetBound);
-        return base+offsetLength;
-    }
-
+    //
 }

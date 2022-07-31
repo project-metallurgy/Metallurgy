@@ -3,6 +3,7 @@ package projectmetallurgy.metallurgy.advanced;
 import net.minecraftforge.common.ForgeConfigSpec;
 import projectmetallurgy.metallurgy.block.copper.BlockChalcopyrite;
 import projectmetallurgy.metallurgy.block.copper.BlockMalachite;
+import projectmetallurgy.metallurgy.block.device.BlockStoneAnvil;
 import projectmetallurgy.metallurgy.block.iron.BlockHematite;
 
 public class MetallurgyConfigs {
@@ -41,9 +42,9 @@ public class MetallurgyConfigs {
         BUILDER.push("Processing");
 
         BUILDER.push("Stone hammer and anvil");
-        BUILDER.comment("Loss rate [0,1]").define("shaa_lossrate",0.04);
-        BUILDER.comment("Minimum particle size [10,100000] 100000 to disable.").define("shaa_mps",1000);
-        BUILDER.comment("Crushing rate [0,1]").define("shaa_cr",0.5);
+        BlockStoneAnvil.LossRatio = BUILDER.comment("Loss rate [0,1]").defineInRange("shaa_lossrate",0.04,0,1);
+        BlockStoneAnvil.MinGranularity = BUILDER.comment("Minimum particle size [10,100000] 100000 to disable.").defineInRange("shaa_mps",1000,10,100000);
+        BlockStoneAnvil.CrushingRatio = BUILDER.comment("Crushing rate [0,1]").defineInRange("shaa_cr",0.5,0,1);
         BUILDER.pop();
 
         BUILDER.push("Stone mortar and pestle");

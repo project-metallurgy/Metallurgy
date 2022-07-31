@@ -13,13 +13,16 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.*;
 import net.minecraftforge.client.IBlockRenderProperties;
 import net.minecraftforge.client.RenderProperties;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.extensions.IForgeBlock;
 import org.jetbrains.annotations.Nullable;
 import projectmetallurgy.metallurgy.block.blockEntity.StoneAnvilBlockEntity;
 
 public class BlockStoneAnvil extends Block implements EntityBlock {
 
-
+    public static ForgeConfigSpec.ConfigValue<Double> LossRatio;
+    public static ForgeConfigSpec.ConfigValue<Integer> MinGranularity;
+    public static ForgeConfigSpec.ConfigValue<Double> CrushingRatio;
 
     public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 8, 16);
 
@@ -28,9 +31,8 @@ public class BlockStoneAnvil extends Block implements EntityBlock {
         return SHAPE;
     }
 
-
     public BlockStoneAnvil() {
-        super(BlockBehaviour.Properties.of(Material.STONE).noOcclusion().destroyTime(50));
+        super(BlockBehaviour.Properties.of(Material.STONE).noOcclusion().destroyTime(0.5F));
     }
     @Nullable
     @Override

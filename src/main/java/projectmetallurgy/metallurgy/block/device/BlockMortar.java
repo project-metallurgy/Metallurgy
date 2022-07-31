@@ -11,10 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import projectmetallurgy.metallurgy.block.blockEntity.BlockEntityRegistry;
 
-public class BlockMortar extends Block implements EntityBlock {
+public class BlockMortar extends Block implements EntityBlock{
 
     public BlockMortar() {
-        super(BlockBehaviour.Properties.of(Material.STONE));
+        super(BlockBehaviour.Properties.of(Material.STONE).noOcclusion().destroyTime(0.5F));
     }
 
     @Nullable

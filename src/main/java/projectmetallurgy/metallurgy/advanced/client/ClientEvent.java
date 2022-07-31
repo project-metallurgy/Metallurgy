@@ -1,6 +1,8 @@
 package projectmetallurgy.metallurgy.advanced.client;
 
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ClientRegistry;
@@ -11,6 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import projectmetallurgy.metallurgy.Metallurgy;
 import projectmetallurgy.metallurgy.advanced.renderer.StoneAnvilRenderer;
+import projectmetallurgy.metallurgy.block.BlockRegistry;
 import projectmetallurgy.metallurgy.block.blockEntity.BlockEntityRegistry;
 import projectmetallurgy.metallurgy.block.blockEntity.StoneAnvilBlockEntity;
 
@@ -18,11 +21,12 @@ import projectmetallurgy.metallurgy.block.blockEntity.StoneAnvilBlockEntity;
 public class ClientEvent {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event){
-
+        ItemBlockRenderTypes.setRenderLayer(BlockRegistry.mortarBlock.get(), RenderType.cutout());
     }
     @SubscribeEvent
     public static void onRegRenderer(EntityRenderersEvent.RegisterRenderers event){
         event.registerBlockEntityRenderer(BlockEntityRegistry.STONE_ANVIL_BLOCK_ENTITY.get(), StoneAnvilRenderer::new);
     }
+
 
 }

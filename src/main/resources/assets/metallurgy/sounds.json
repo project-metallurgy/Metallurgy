@@ -1,0 +1,9 @@
+{
+  "crushing": {
+    "subtitle": "crushing",
+    "replace": "true",
+    "sounds": [
+      "metallurgy:crushing"
+    ]
+  }
+}

@@ -8,43 +8,39 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class StoneAnvilBlockEntity extends BlockEntity {
-    public Item itemPlacedOn = Items.AIR;
-    public CompoundTag tag = new CompoundTag();
-    public int clickCount = 0;
+    public ItemStack itemStackOn = new ItemStack(Items.AIR);
 
     public StoneAnvilBlockEntity(BlockPos pWorldPosition, BlockState pBlockState) {
         super(BlockEntityRegistry.STONE_ANVIL_BLOCK_ENTITY.get(), pWorldPosition, pBlockState);
     }
 
     @Override
-    public CompoundTag serializeNBT() {
-        var registryName = this.itemPlacedOn.getRegistryName();
-        if (registryName == null) return null;
-        var namespace = registryName.getNamespace();
-        var path = registryName.getPath();
-        CompoundTag tag = new CompoundTag();
-        tag.put("tag", this.tag);
-        String name = String.format("%s:%s", namespace, path);
-        tag.putString("item", name);
-        tag.putInt("click_count", this.clickCount);
-        return tag;
+    protected void saveAdditional(CompoundTag pTag) {
+        pTag.put("item",itemStackOn.serializeNBT());
+        super.saveAdditional(pTag);
     }
 
     @Override
-    public void deserializeNBT(CompoundTag nbt) {
-        this.tag = (CompoundTag) nbt.get("tag");
-        this.clickCount = nbt.getInt("click_count");
-        this.itemPlacedOn = ForgeRegistries.ITEMS.getValue(new ResourceLocation(nbt.getString("item")));
+    public void load(CompoundTag pTag) {
+        super.load(pTag);
+        this.itemStackOn = ItemStack.of(pTag.getCompound("item"));
     }
-    /*
 
     @Nullable
     @Override
@@ -53,33 +49,30 @@ public class StoneAnvilBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        if (pkt.getTag() != null) {
-            handleUpdateTag(pkt.getTag());
-        }
-    }
-
-    @NotNull
-    @Override
     public CompoundTag getUpdateTag() {
-        var tag = super.getUpdateTag();
-        var registryName = this.itemPlacedOn.getRegistryName();
-        if (registryName == null) return tag;
-        var namespace = registryName.getNamespace();
-        var path = registryName.getPath();
-        tag.put("tag", this.tag);
-        String name = String.format("%s:%s", namespace, path);
-        tag.putString("item", name);
-        tag.putInt("click_count", this.clickCount);
-        return tag;
+        return serializeNBT();
     }
 
     @Override
     public void handleUpdateTag(CompoundTag tag) {
-        this.clickCount = tag.getInt("click_count");
-        this.tag = (CompoundTag) tag.get("tag");
-        this.itemPlacedOn = ForgeRegistries.ITEMS.getValue(new ResourceLocation(tag.getString("item")));
+        super.handleUpdateTag(tag);
+        load(tag);
     }
 
-     */
+
+
+    @Override
+    public CompoundTag serializeNBT() {
+        CompoundTag tag = super.serializeNBT();
+        tag.put("item",this.itemStackOn.serializeNBT());
+        return tag;
+    }
+
+
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        super.onDataPacket(net, pkt);
+        load(pkt.getTag());
+    }
 }

@@ -32,7 +32,7 @@ public class DataSupplier {
         addTagSupplier(ItemRawMalachite.class,BlockMalachite::genTag);
         addTagSupplier(ItemRawHematite.class, BlockHematite::genTag);
 
-
+        addCrushProcessor(ItemRawMalachite.class,BlockMalachite::crush);
     }
 
     //OnDigging

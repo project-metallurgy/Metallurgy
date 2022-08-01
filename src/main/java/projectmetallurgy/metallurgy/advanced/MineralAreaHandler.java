@@ -141,6 +141,7 @@ public class MineralAreaHandler {
                     }
                 }
             }
+            areaData.setDirty();
         }
     }
 }

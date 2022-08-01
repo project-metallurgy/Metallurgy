@@ -36,16 +36,16 @@ public class StoneAnvilRenderer implements BlockEntityRenderer<StoneAnvilBlockEn
     @Override
     public void render(StoneAnvilBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
 
-        float scale = 0.3f;
+        float scale = 0.5f;
         pPoseStack.pushPose();
-
         pPoseStack.translate(0.5f, 0.52f, 0.5f);
         pPoseStack.mulPose(Vector3f.XN.rotationDegrees(90));
         pPoseStack.scale(scale, scale, scale);
-        ItemStack stack = new ItemStack(pBlockEntity.itemPlacedOn);
+        ItemStack stack = pBlockEntity.itemStackOn.copy();
         BakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, pBlockEntity.getLevel(), null,0);
         Minecraft.getInstance().getItemRenderer().render(stack, ItemTransforms.TransformType.FIXED,true,pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,ibakedmodel);
         //Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.GLASS.defaultBlockState(),pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,EmptyModelData.INSTANCE);
         pPoseStack.popPose();
+
     }
 }

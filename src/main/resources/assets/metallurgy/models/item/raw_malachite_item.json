@@ -2,5 +2,25 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "metallurgy:item/malachite"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "metallurgy:granularity": 1000
+      },
+      "model": "item/raw_malachite_item_1"
+    },
+    {
+      "predicate": {
+        "metallurgy:granularity": 100
+      },
+      "model": "item/raw_malachite_item_2"
+    },
+    {
+      "predicate": {
+        "metallurgy:granularity": 10
+      },
+      "model": "item/raw_malachite_item_3"
+    }
+  ]
 }

@@ -12,6 +12,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import projectmetallurgy.metallurgy.advanced.DataSupplier;
 import projectmetallurgy.metallurgy.advanced.MetallurgyConfigs;
+import projectmetallurgy.metallurgy.advanced.client.ParticleRegistry;
+import projectmetallurgy.metallurgy.advanced.client.SoundRegistry;
 import projectmetallurgy.metallurgy.advanced.renderer.StoneAnvilRenderer;
 import projectmetallurgy.metallurgy.block.BlockRegistry;
 import projectmetallurgy.metallurgy.block.blockEntity.BlockEntityRegistry;
@@ -65,6 +67,8 @@ public class Metallurgy {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MetallurgyConfigs.CONFIG_SPEC,"metallurgy-configs.toml");
         BlockRegistry.BLOCKS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
+        SoundRegistry.SOUNDS.register(modEventBus);
+        ParticleRegistry.PARTICLE.register(modEventBus);
         BlockEntityRegistry.TILE_ENTITY_TYPES.register(modEventBus);
     }
 

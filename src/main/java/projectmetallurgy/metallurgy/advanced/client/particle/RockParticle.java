@@ -12,8 +12,8 @@ public class RockParticle extends TextureSheetParticle {
     protected RockParticle(ClientLevel p_108328_, double p_108329_, double p_108330_, double p_108331_, SpriteSet spriteSet, double p_108332_, double p_108333_, double p_108334_ ) {
         super(p_108328_, p_108329_, p_108330_, p_108331_, p_108332_, p_108333_, p_108334_);
         this.lifetime = 20;
-        this.friction = 0.8F;
-        this.quadSize *= 0.85F;
+        this.friction = 0.5F;
+        this.quadSize *= 0.8F;
         this.setSpriteFromAge(spriteSet);
     }
 
@@ -46,5 +46,4 @@ public class RockParticle extends TextureSheetParticle {
             return new RockParticle(level, x, y, z,this.sprites, dx, dy, dz);
         }
     }
-
 }

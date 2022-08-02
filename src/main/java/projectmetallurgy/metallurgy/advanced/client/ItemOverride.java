@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -13,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 import projectmetallurgy.metallurgy.Metallurgy;
 import projectmetallurgy.metallurgy.item.ItemRegistry;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD,value = Dist.CLIENT)
 public class ItemOverride {
     @SubscribeEvent
     public static void onClient (FMLClientSetupEvent event){
@@ -25,8 +26,5 @@ public class ItemOverride {
                 }
             });
         });
-
-
     }
-
 }

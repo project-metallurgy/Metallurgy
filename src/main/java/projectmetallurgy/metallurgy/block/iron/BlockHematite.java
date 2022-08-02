@@ -3,6 +3,7 @@ package projectmetallurgy.metallurgy.block.iron;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.ForgeConfigSpec;
 import projectmetallurgy.metallurgy.Metallurgy;
+import projectmetallurgy.metallurgy.block.device.BlockStoneAnvil;
 import projectmetallurgy.metallurgy.utils.ProcessingCalc;
 
 import java.util.Random;
@@ -31,7 +32,35 @@ public class BlockHematite extends BlockIronOre{
         tag.putInt("veinstone_mass",veinstone_mass);
         return tag;
     }
+    public static CompoundTag crush(CompoundTag tag){
+        int minGranularity = BlockStoneAnvil.MinGranularity.get();
+        double lossRatio = BlockStoneAnvil.LossRatio.get();
+        double crushingRatio = BlockStoneAnvil.CrushingRatio.get();
 
+        int granularity = tag.getInt("granularity");
+        granularity = (int) Math.ceil(granularity * crushingRatio);
+        if(granularity<minGranularity){
+            granularity=minGranularity;
+        }
+
+        int fe_mass = tag.getInt("fe_mass");
+        fe_mass = (int) (fe_mass*(1-lossRatio));
+
+        int veinstone_mass = tag.getInt("veinstone_mass");
+        veinstone_mass = (int) (veinstone_mass*(1-lossRatio));
+
+
+        int mass = (int) (veinstone_mass + (fe_mass * 1.430));
+
+        double eta = ProcessingCalc.calcEta(Eta0.get(),granularity,Alpha.get());
+
+        tag.putInt("granularity",granularity);
+        tag.putInt("fe_mass",fe_mass);
+        tag.putInt("veinstone_mass",veinstone_mass);
+        tag.putInt("mass",mass);
+        tag.putDouble("eta",eta);
+        return tag;
+    }
     public BlockHematite() {
         super();
     }

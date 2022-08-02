@@ -2,10 +2,12 @@ package projectmetallurgy.metallurgy.block.device;
 
 import net.minecraft.client.renderer.block.model.ItemOverride;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -28,6 +31,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.extensions.IForgeBlock;
 import org.jetbrains.annotations.Nullable;
 import projectmetallurgy.metallurgy.advanced.DataSupplier;
+import projectmetallurgy.metallurgy.advanced.client.ParticleRegistry;
 import projectmetallurgy.metallurgy.advanced.client.SoundRegistry;
 import projectmetallurgy.metallurgy.block.blockEntity.StoneAnvilBlockEntity;
 import projectmetallurgy.metallurgy.item.ItemRegistry;
@@ -84,10 +88,38 @@ public class BlockStoneAnvil extends Block implements EntityBlock {
             anvil.itemStackOn.setTag(tag);
             anvil.setChanged();
             pLevel.setBlockAndUpdate(pPos,pState);
-            if (pLevel.isClientSide) pLevel.playLocalSound(pPos.getX(),pPos.getY(),pPos.getZ(),SoundRegistry.crushingSound.get(),SoundSource.BLOCKS,1f,1f,true);
+            itemStack.setDamageValue(itemStack.getDamageValue()-1);
+            if (pLevel.isClientSide) {
+                pLevel.playLocalSound(pPos.getX(), pPos.getY(), pPos.getZ(), SoundRegistry.crushingSound.get(), SoundSource.BLOCKS, 1f, 1f, true);
+                int i =0;
+                while (i<6) {
+                    pLevel.addParticle(ParticleRegistry.ROCK.get(), pPos.getX()+0.5, pPos.getY()+0.5, pPos.getZ()+0.5, 1, 0.15, 1);
+                    i += 1;
+                }
+            }
+            //质量为零就敲烂了
+            if (anvil.itemStackOn.getTag().getInt("mass")==0){
+                anvil.itemStackOn.setCount(0);
+                if (pLevel.isClientSide) {
+                    int i = 0;
+                    while (i<20) {
+                        pLevel.addParticle(ParticleRegistry.ROCK.get(), pPos.getX()+0.5, pPos.getY()+0.5, pPos.getZ()+0.5, 1, 0.15, 1);
+                        i += 1;
+                    }
+                }
+            }
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid) {
+        StoneAnvilBlockEntity anvil = (StoneAnvilBlockEntity) level.getBlockEntity(pos);
+        if (!anvil.itemStackOn.is(Items.AIR)){
+            level.addFreshEntity(new ItemEntity(level,pos.getX(),pos.getY(),pos.getZ(),anvil.itemStackOn));
+        }
+        return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
     }
 
     public BlockStoneAnvil() {

@@ -22,6 +22,6 @@ public class ParticleRegistry {
 
     @SubscribeEvent
     public static void reg(ParticleFactoryRegisterEvent event){
-        //Minecraft.getInstance().particleEngine.register(ROCK.get(), new RockParticle.Provider(event));
+        Minecraft.getInstance().particleEngine.register(ROCK.get(), RockParticle.Provider::new);
     }
 }

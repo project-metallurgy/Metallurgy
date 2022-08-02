@@ -3,6 +3,7 @@ package projectmetallurgy.metallurgy.block.copper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.ForgeConfigSpec;
 import projectmetallurgy.metallurgy.Metallurgy;
+import projectmetallurgy.metallurgy.block.device.BlockStoneAnvil;
 import projectmetallurgy.metallurgy.utils.ProcessingCalc;
 
 import java.util.Random;
@@ -56,4 +57,44 @@ public class BlockChalcopyrite extends BlockCopperOre{
         tag.putDouble("eta",eta);
         return tag;
     }
+
+    public static CompoundTag crush(CompoundTag tag){
+        int minGranularity = BlockStoneAnvil.MinGranularity.get();
+        double lossRatio = BlockStoneAnvil.LossRatio.get();
+        double crushingRatio = BlockStoneAnvil.CrushingRatio.get();
+
+        int granularity = tag.getInt("granularity");
+        granularity = (int) Math.ceil(granularity * crushingRatio);
+        if(granularity<minGranularity){
+            granularity=minGranularity;
+        }
+
+        int cu_mass = tag.getInt("cu_mass");
+        cu_mass = (int) (cu_mass*(1-lossRatio));
+        int fe_mass = tag.getInt("fe_mass");
+        fe_mass = (int) (fe_mass*(1-lossRatio));
+        int as_mass = tag.getInt("as_mass");
+        as_mass = (int) (as_mass*(1-lossRatio));
+        int s_mass = tag.getInt("s_mass");
+        s_mass = (int) (s_mass*(1-lossRatio));
+
+        int veinstone_mass = tag.getInt("veinstone_mass");
+        veinstone_mass = (int) (veinstone_mass*(1-lossRatio));
+
+
+        int mass = veinstone_mass +cu_mass+fe_mass+as_mass+s_mass;
+
+        double eta = ProcessingCalc.calcEta(Eta0.get(),granularity,Alpha.get());
+
+        tag.putInt("granularity",granularity);
+        tag.putInt("cu_mass",cu_mass);
+        tag.putInt("fe_mass",fe_mass);
+        tag.putInt("as_mass",as_mass);
+        tag.putInt("s_mass",s_mass);
+        tag.putInt("veinstone_mass",veinstone_mass);
+        tag.putInt("mass",mass);
+        tag.putDouble("eta",eta);
+        return tag;
+    }
+
 }

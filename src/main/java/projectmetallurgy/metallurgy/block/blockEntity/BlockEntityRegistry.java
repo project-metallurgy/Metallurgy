@@ -19,7 +19,7 @@ public class BlockEntityRegistry {
     public static final RegistryObject<BlockEntityType<MortarBlockEntity>> MORTAR_BLOCK_ENTITY =
             TILE_ENTITY_TYPES.register
                     ("mortar_block_entity",
-                    () -> BlockEntityType.Builder.of(MortarBlockEntity::new, BlockRegistry.stoneAnvilBlock.get()).build(null)
+                    () -> BlockEntityType.Builder.of(MortarBlockEntity::new, BlockRegistry.mortarBlock.get()).build(null)
             );
 
     public static RegistryObject<BlockEntityType<StoneAnvilBlockEntity>> STONE_ANVIL_BLOCK_ENTITY =

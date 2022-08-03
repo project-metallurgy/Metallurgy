@@ -14,7 +14,6 @@ import projectmetallurgy.metallurgy.advanced.DataSupplier;
 import projectmetallurgy.metallurgy.advanced.MetallurgyConfigs;
 import projectmetallurgy.metallurgy.advanced.client.ParticleRegistry;
 import projectmetallurgy.metallurgy.advanced.client.SoundRegistry;
-import projectmetallurgy.metallurgy.advanced.renderer.StoneAnvilRenderer;
 import projectmetallurgy.metallurgy.block.BlockRegistry;
 import projectmetallurgy.metallurgy.block.blockEntity.BlockEntityRegistry;
 import projectmetallurgy.metallurgy.item.ItemRegistry;

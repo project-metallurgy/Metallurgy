@@ -1,5 +1,5 @@
 {
-  "parent": "item/generated",
+  "parent": "metallurgy:item/raw_chalcopyrite_item",
   "textures": {
     "layer0": "metallurgy:item/chalcopyrite_1"
   }

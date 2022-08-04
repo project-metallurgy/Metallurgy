@@ -9,6 +9,8 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ClientRegistry;
@@ -33,9 +35,9 @@ public class ClientEvent {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event){
         event.enqueueWork(()->{
-            ItemProperties.register(ItemRegistry.malachiteItem.get(),
-                    new ResourceLocation(Metallurgy.MOD_ID,"granularity"),ClientEvent::getGranularity);
-
+            regGranularityOverride(ItemRegistry.rawChalcopyriteItem.get());
+            regGranularityOverride(ItemRegistry.rawHematiteItem.get());
+            regGranularityOverride(ItemRegistry.rawMalachiteItem.get());
         ItemBlockRenderTypes.setRenderLayer(BlockRegistry.mortarBlock.get(), RenderType.cutout());
         });
     }
@@ -46,7 +48,6 @@ public class ClientEvent {
     }
 
     public static int getGranularity(ItemStack pStack, ClientLevel pLevel,LivingEntity pEntity,int pSeed){
-        System.out.println("test");
         if (pStack.getTag()!=null) {
             return pStack.getTag().getInt("granularity");
         }
@@ -54,6 +55,12 @@ public class ClientEvent {
             return 10000;
         }
     }
+
+    public static void regGranularityOverride(Item item){
+        ItemProperties.register(item,
+                new ResourceLocation(Metallurgy.MOD_ID,"granularity"),ClientEvent::getGranularity);
+    }
+
 }
 
 

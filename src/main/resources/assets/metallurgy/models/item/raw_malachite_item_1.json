@@ -1,5 +1,5 @@
 {
-  "parent": "item/generated",
+  "parent": "metallurgy:item/raw_malachite_item",
   "textures": {
     "layer0": "metallurgy:item/malachite_1"
   }

@@ -15,7 +15,6 @@ import org.jetbrains.annotations.Nullable;
 public class MortarBlockEntity extends BlockEntity {
     public ItemStack itemStackOn = new ItemStack(Items.AIR);
 
-
     public MortarBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.MORTAR_BLOCK_ENTITY.get(), pos, state);
     }
@@ -28,8 +27,8 @@ public class MortarBlockEntity extends BlockEntity {
 
     @Override
     public void load(CompoundTag pTag) {
-        this.itemStackOn = ItemStack.of((CompoundTag) pTag.get("item"));
         super.load(pTag);
+        this.itemStackOn = ItemStack.of((CompoundTag) pTag.get("item"));
     }
 
     @Nullable
@@ -42,11 +41,13 @@ public class MortarBlockEntity extends BlockEntity {
     public CompoundTag getUpdateTag() {
         return serializeNBT();
     }
+
     @Override
     public void handleUpdateTag(CompoundTag tag) {
         super.handleUpdateTag(tag);
         load(tag);
     }
+
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag tag = super.serializeNBT();

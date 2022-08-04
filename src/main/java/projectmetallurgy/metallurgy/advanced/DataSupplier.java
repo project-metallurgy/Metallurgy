@@ -35,6 +35,10 @@ public class DataSupplier {
         addCrushProcessor(ItemRawMalachite.class,BlockMalachite::crush);
         addCrushProcessor(ItemRawChalcopyrite.class,BlockChalcopyrite::crush);
         addCrushProcessor(ItemRawHematite.class,BlockHematite::crush);
+
+        addSmashProcessor(ItemRawMalachite.class,BlockMalachite::smash);
+        addSmashProcessor(ItemRawChalcopyrite.class,BlockChalcopyrite::smash);
+        addSmashProcessor(ItemRawHematite.class,BlockHematite::smash);
     }
 
     //OnDigging
@@ -47,9 +51,14 @@ public class DataSupplier {
 
     //Crush
     public static Map<Class<? extends ItemRawOre>, Function<CompoundTag,CompoundTag>> crushProcessors = new HashMap<>();
-
     public static void addCrushProcessor(Class<?extends ItemRawOre> rawOre, Function<CompoundTag,CompoundTag> crushProcessor){
         crushProcessors.put(rawOre,crushProcessor);
     }
     //
+
+    //Smashing
+    public static Map<Class<? extends ItemRawOre>,Function<CompoundTag,CompoundTag>> smashProcessors = new HashMap<>();
+    public static void addSmashProcessor (Class<? extends ItemRawOre> rawOre , Function<CompoundTag,CompoundTag> function){
+        smashProcessors.put(rawOre,function);
+    }
 }

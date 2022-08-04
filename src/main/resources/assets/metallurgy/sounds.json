@@ -1,9 +1,16 @@
 {
   "crushing": {
-    "subtitle": "crushing",
+    "subtitle": "subtitle.crushing",
     "replace": "true",
     "sounds": [
-      "metallurgy:crushing"
+      "metallurgy:crushing1"
+    ]
+  },
+  "smashing": {
+    "subtitle": "subtitle.smashing",
+    "replace": "true",
+    "sounds": [
+      "metallurgy:smashing1"
     ]
   }
 }

@@ -13,6 +13,7 @@ import projectmetallurgy.metallurgy.item.raw.ItemRawChalcopyrite;
 import projectmetallurgy.metallurgy.item.raw.ItemRawHematite;
 import projectmetallurgy.metallurgy.item.raw.ItemRawMalachite;
 import projectmetallurgy.metallurgy.item.tool.ItemStoneHammer;
+import projectmetallurgy.metallurgy.item.tool.ItemStonePestle;
 
 public class ItemRegistry {
      public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Metallurgy.MOD_ID);
@@ -42,5 +43,6 @@ public class ItemRegistry {
     public static final RegistryObject<Item> rawMalachiteItem = ITEMS.register("raw_malachite_item", ItemRawMalachite::new);
     public static final RegistryObject<Item> rawChalcopyriteItem = ITEMS.register("raw_chalcopyrite_item", ItemRawChalcopyrite::new);
     public static final RegistryObject<Item> stoneHammerItem = ITEMS.register("stone_hammer", ItemStoneHammer::new);
+    public static final RegistryObject<Item> stonePestleItem = ITEMS.register("stone_pestle", ItemStonePestle::new);
     //
  }

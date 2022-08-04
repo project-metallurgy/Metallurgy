@@ -59,16 +59,12 @@ public class StoneAnvilBlockEntity extends BlockEntity {
         load(tag);
     }
 
-
-
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag tag = super.serializeNBT();
         tag.put("item",this.itemStackOn.serializeNBT());
         return tag;
     }
-
-
 
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {

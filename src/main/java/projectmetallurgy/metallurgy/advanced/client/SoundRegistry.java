@@ -10,5 +10,5 @@ import projectmetallurgy.metallurgy.Metallurgy;
 public class SoundRegistry {
     public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Metallurgy.MOD_ID);
     public static final RegistryObject<SoundEvent> crushingSound = SOUNDS.register("crushing", () -> new SoundEvent(new ResourceLocation(Metallurgy.MOD_ID, "crushing")));
-
+    public static final RegistryObject<SoundEvent> smashingSound = SOUNDS.register("smashing",()-> new SoundEvent(new ResourceLocation(Metallurgy.MOD_ID,"smashing")));
 }

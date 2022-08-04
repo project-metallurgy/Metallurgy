@@ -3,6 +3,7 @@ package projectmetallurgy.metallurgy.block.iron;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.ForgeConfigSpec;
 import projectmetallurgy.metallurgy.Metallurgy;
+import projectmetallurgy.metallurgy.block.device.BlockMortar;
 import projectmetallurgy.metallurgy.block.device.BlockStoneAnvil;
 import projectmetallurgy.metallurgy.utils.ProcessingCalc;
 
@@ -64,4 +65,29 @@ public class BlockHematite extends BlockIronOre{
     public BlockHematite() {
         super();
     }
+
+    public static CompoundTag smash(CompoundTag tag){
+        int minGranularity = BlockMortar.MinGranularity.get();
+        int veinstoneCorrection = BlockMortar.VeinstoneCorrection.get();
+        double smashingRatio = BlockMortar.SmashingRatio.get();
+
+        int granularity = tag.getInt("granularity");
+        granularity = (int) Math.ceil(granularity * smashingRatio);
+        if(granularity<minGranularity){
+            granularity=minGranularity;
+        }
+
+        int fe_mass = tag.getInt("fe_mass");
+
+        int veinstone_mass = tag.getInt("veinstone_mass");
+        veinstone_mass = veinstone_mass+veinstoneCorrection;
+        int mass = (int) (veinstone_mass + fe_mass*1.43);
+        double eta = ProcessingCalc.calcEta(Eta0.get(),granularity,Alpha.get());
+        tag.putInt("granularity",granularity);
+        tag.putInt("veinstone_mass",veinstone_mass);
+        tag.putInt("mass",mass);
+        tag.putDouble("eta",eta);
+        return tag;
+    }
+
 }

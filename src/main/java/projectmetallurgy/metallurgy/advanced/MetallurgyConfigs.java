@@ -3,6 +3,7 @@ package projectmetallurgy.metallurgy.advanced;
 import net.minecraftforge.common.ForgeConfigSpec;
 import projectmetallurgy.metallurgy.block.copper.BlockChalcopyrite;
 import projectmetallurgy.metallurgy.block.copper.BlockMalachite;
+import projectmetallurgy.metallurgy.block.device.BlockMortar;
 import projectmetallurgy.metallurgy.block.device.BlockStoneAnvil;
 import projectmetallurgy.metallurgy.block.iron.BlockHematite;
 
@@ -43,14 +44,14 @@ public class MetallurgyConfigs {
 
         BUILDER.push("Stone hammer and anvil");
         BlockStoneAnvil.LossRatio = BUILDER.comment("Loss rate [0,1]").defineInRange("shaa_lossrate",0.04,0,1);
-        BlockStoneAnvil.MinGranularity = BUILDER.comment("Minimum particle size [10,100000] 100000 to disable.").defineInRange("shaa_mps",1000,10,100000);
+        BlockStoneAnvil.MinGranularity = BUILDER.comment("Minimum granularity [10,100000] 100000 to disable.").defineInRange("shaa_mps",1000,10,100000);
         BlockStoneAnvil.CrushingRatio = BUILDER.comment("Crushing rate [0,1]").defineInRange("shaa_cr",0.5,0,1);
         BUILDER.pop();
 
         BUILDER.push("Stone mortar and pestle");
-        BUILDER.comment("Minimum particle size [10,100000] 100000 to disable.").define("smap_mps",50);
-        BUILDER.comment("Crushing rate [0,1]").define("smap_cr",0.8);
-        BUILDER.comment("Veinstone prefix [0,intmax]").define("smap_vp",100);
+        BlockMortar.MinGranularity = BUILDER.comment("Minimum granularity [10,100000] 100000 to disable.").defineInRange("smap_mps",50,10,100000);
+        BlockMortar.SmashingRatio = BUILDER.comment("Smashing rate [0,1]").defineInRange("smap_sr",0.8,0,1);
+        BlockMortar.VeinstoneCorrection = BUILDER.comment("Veinstone prefix [0,intmax]").defineInRange("smap_vp",100,0,Integer.MAX_VALUE);
         BUILDER.pop();
 
         BUILDER.pop();

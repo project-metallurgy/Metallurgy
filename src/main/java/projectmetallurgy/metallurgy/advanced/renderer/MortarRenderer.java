@@ -22,15 +22,13 @@ public class MortarRenderer implements BlockEntityRenderer<MortarBlockEntity> {
     public void render(MortarBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
         float scale = 0.5f;
         pPoseStack.pushPose();
-        pPoseStack.translate(0.5f, 1.5f, 0.5f);
-        //pPoseStack.mulPose(Vector3f.XN.rotationDegrees(90));
+        pPoseStack.translate(0.5f, 0.9f, 0.5f);
+        pPoseStack.mulPose(Vector3f.XN.rotationDegrees(90));
         pPoseStack.scale(scale, scale, scale);
-        //ItemStack stack = pBlockEntity.itemStackOn.copy();
-       ItemStack stack = new ItemStack(Items.DIAMOND);
+        ItemStack stack = pBlockEntity.itemStackOn.copy();
         BakedModel ibakedmodel = Minecraft.getInstance().getItemRenderer().getModel(stack, pBlockEntity.getLevel(), null,0);
         Minecraft.getInstance().getItemRenderer().render(stack, ItemTransforms.TransformType.FIXED,true,pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,ibakedmodel);
         //Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Blocks.GLASS.defaultBlockState(),pPoseStack,pBufferSource,pPackedLight,pPackedOverlay,EmptyModelData.INSTANCE);
         pPoseStack.popPose();
-
     }
 }

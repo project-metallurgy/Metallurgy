@@ -3,6 +3,7 @@ package projectmetallurgy.metallurgy.block.copper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.ForgeConfigSpec;
 import projectmetallurgy.metallurgy.Metallurgy;
+import projectmetallurgy.metallurgy.block.device.BlockMortar;
 import projectmetallurgy.metallurgy.block.device.BlockStoneAnvil;
 import projectmetallurgy.metallurgy.item.raw.ItemRawOre;
 import projectmetallurgy.metallurgy.utils.ProcessingCalc;
@@ -33,7 +34,6 @@ public class BlockMalachite extends BlockCopperOre{
         tag.putDouble("eta",eta);
         return tag;
     }
-
     public static CompoundTag crush(CompoundTag tag){
         int minGranularity = BlockStoneAnvil.MinGranularity.get();
         double lossRatio = BlockStoneAnvil.LossRatio.get();
@@ -63,5 +63,27 @@ public class BlockMalachite extends BlockCopperOre{
         tag.putDouble("eta",eta);
         return tag;
     }
+    public static CompoundTag smash(CompoundTag tag){
+        int minGranularity = BlockMortar.MinGranularity.get();
+        int veinstoneCorrection = BlockMortar.VeinstoneCorrection.get();
+        double smashingRatio = BlockMortar.SmashingRatio.get();
 
+        int granularity = tag.getInt("granularity");
+        granularity = (int) Math.ceil(granularity * smashingRatio);
+        if(granularity<minGranularity){
+            granularity=minGranularity;
+        }
+
+        int cu_mass = tag.getInt("cu_mass");
+        int veinstone_mass = tag.getInt("veinstone_mass");
+        veinstone_mass = veinstone_mass+veinstoneCorrection;
+        int mass = (int) (veinstone_mass +(cu_mass*1.74));
+        double eta = ProcessingCalc.calcEta(Eta0.get(),granularity,Alpha.get());
+
+        tag.putInt("granularity",granularity);
+        tag.putInt("veinstone_mass",veinstone_mass);
+        tag.putInt("mass",mass);
+        tag.putDouble("eta",eta);
+        return tag;
+    }
 }

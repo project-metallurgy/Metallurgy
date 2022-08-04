@@ -17,9 +17,14 @@ import projectmetallurgy.metallurgy.advanced.client.SoundRegistry;
 import projectmetallurgy.metallurgy.block.BlockRegistry;
 import projectmetallurgy.metallurgy.block.blockEntity.BlockEntityRegistry;
 import projectmetallurgy.metallurgy.item.ItemRegistry;
+import projectmetallurgy.metallurgy.item.raw.ItemRawChalcopyrite;
+import projectmetallurgy.metallurgy.item.raw.ItemRawHematite;
+import projectmetallurgy.metallurgy.item.raw.ItemRawMalachite;
+import projectmetallurgy.metallurgy.item.raw.ItemRawOre;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.List;
 import java.util.Random;
 
 @Mod(Metallurgy.MOD_ID)
@@ -40,7 +45,12 @@ public class Metallurgy {
     public Metallurgy() {
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         DataSupplier.onSetup();
-
+        // TODO: 2022/8/4 Add all of the item raw ores here! 
+        List<Class<? extends ItemRawOre>> listOfItemRawOre = ItemRawOre.listOfItemRawOre;
+        listOfItemRawOre.add(ItemRawHematite.class);
+        listOfItemRawOre.add(ItemRawMalachite.class);
+        listOfItemRawOre.add(ItemRawChalcopyrite.class);
+        
         // FIXME: 2022/7/25 Remember to turn oreGen on!
         /*
         Field CODEC = null;

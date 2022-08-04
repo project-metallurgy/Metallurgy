@@ -3,23 +3,14 @@ package projectmetallurgy.metallurgy.advanced;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
-import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-import projectmetallurgy.metallurgy.block.MetaOre;
-import projectmetallurgy.metallurgy.block.copper.BlockChalcopyrite;
-import projectmetallurgy.metallurgy.block.copper.BlockCopperOre;
-import projectmetallurgy.metallurgy.item.ItemRegistry;
-import projectmetallurgy.metallurgy.item.raw.ItemRawMalachite;
 import projectmetallurgy.metallurgy.item.raw.ItemRawOre;
 
 @Mod.EventBusSubscriber
@@ -112,11 +103,11 @@ public class MineralAreaHandler {
             MineralAreaData areaData = MineralAreaData.get(event.getWorld());
 
             AtomicBoolean isRecorded = new AtomicBoolean(false);
-
-            for (int[][] points:areaData.mineralAreas.keySet()){
+            Map<int[][], CompoundTag> pointsSet = areaData.mineralAreas.get(entity.getItem().getItem().getClass());
+            for (int[][] points:pointsSet.keySet()){
                 if(MineralAreaData.inArea(pos,points)) {
                     isRecorded.set(true);
-                    CompoundTag tag = areaData.mineralAreas.get(points);
+                    CompoundTag tag = pointsSet.get(points);
                     entity.getItem().setTag(tag);
                     break;
                 }
@@ -131,11 +122,11 @@ public class MineralAreaHandler {
                 Class clazz =entity.getItem().getItem().getClass();
                 Supplier<CompoundTag> tagSupplier = DataSupplier.tagSuppliers.get(clazz);
                 CompoundTag tag =  tagSupplier.get();
-                areaData.mineralAreas.put(points,tag);
+                pointsSet.put(points,tag);
 
-                for(int[][] points2:areaData.mineralAreas.keySet()){
+                for(int[][] points2:pointsSet.keySet()){
                     if(MineralAreaData.inArea(pos,points2)){
-                        CompoundTag tag2 = areaData.mineralAreas.get(points2);
+                        CompoundTag tag2 = pointsSet.get(points2);
                         entity.getItem().setTag(tag2);
                         break;
                     }

@@ -12,6 +12,6 @@ public class CreativeTabMetal extends CreativeModeTab {
 
     @Override
     public @NotNull ItemStack makeIcon() {
-        return new ItemStack(ItemRegistry.copperConcentrate.get());
+        return new ItemStack(ItemRegistry.rawHematiteItem.get());
     }
 }

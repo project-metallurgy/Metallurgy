@@ -10,9 +10,13 @@ import net.minecraft.world.level.Level;
 import projectmetallurgy.metallurgy.creativeTab.MetallurgyCreativeTab;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemRawOre extends Item {
+
+    public static List<Class<? extends ItemRawOre>> listOfItemRawOre = new ArrayList<>();
+
     public ItemRawOre() {
         super(new Properties().tab(MetallurgyCreativeTab.metal));
     }

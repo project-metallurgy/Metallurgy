@@ -31,6 +31,26 @@ public class ItemRawOre extends Item {
 
             stringBuilder.append(I18n.get("label.mass"));
             stringBuilder.append(mass);
+
+            //temp
+            int cu_mass = pStack.getTag().getInt("cu_mass");
+            int fe_mass = pStack.getTag().getInt("fe_mass");
+            int veinstone_mass = pStack.getTag().getInt("veinstone_mass");
+            double eta = pStack.getTag().getDouble("eta");
+            if (cu_mass != 0){
+                pTooltipComponents.add(new TextComponent("铜质量："+cu_mass));
+            }
+            if (fe_mass != 0){
+                pTooltipComponents.add(new TextComponent("铁质量："+fe_mass));
+            }
+            if (veinstone_mass != 0){
+                pTooltipComponents.add(new TextComponent("脉石质量："+veinstone_mass));
+            }
+            if (eta != 0){
+                pTooltipComponents.add(new TextComponent("分离比："+eta));
+            }
+            //
+
             pTooltipComponents.add(new TextComponent(stringBuilder.toString()));
 
             pTooltipComponents.add(new TextComponent(I18n.get("label.granularity")+granularity));

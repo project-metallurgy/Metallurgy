@@ -1,9 +1,18 @@
 {
   "itemGroup.metallurgy_metal": "冶金丨金属",
   "block.metallurgy.copper_concentrate":"铜精矿",
+  "block.metallurgy.stone_anvil":"石砧",
+  "block.metallurgy.mortar":"石研钵",
+  "block.metallurgy.hematite":"赤铁矿",
+  "block.metallurgy.malachite":"孔雀石",
+  "block.metallurgy.chalcopyrite":"黄铜矿",
+
   "item.metallurgy.raw_hematite_item":"粗赤铁矿",
   "item.metallurgy.raw_malachite_item":"粗孔雀石",
   "item.metallurgy.raw_chalcopyrite_item":"粗黄铜矿",
+  "item.metallurgy.stone_hammer":"石锤",
+  "item.metallurgy.stone_pestle":"石研杵",
+
   "label.granularity": "粒度：",
   "label.mass": "质量："
 }

@@ -12,11 +12,6 @@ import java.util.*;
 public class MineralAreaData extends SavedData {
 
     public MineralAreaData(){
-        ItemRawOre.listOfItemRawOre.forEach(clazz->{
-            if (this.mineralAreas.get(clazz)==null){
-                this.mineralAreas.put(clazz,new HashMap<>());
-            }
-        });
     }
 
     public static boolean inArea(BlockPos pos,int[][] points){

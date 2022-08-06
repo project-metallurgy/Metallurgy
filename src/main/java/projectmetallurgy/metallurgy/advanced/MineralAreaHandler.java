@@ -7,6 +7,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
@@ -104,6 +105,12 @@ public class MineralAreaHandler {
 
             AtomicBoolean isRecorded = new AtomicBoolean(false);
             Map<int[][], CompoundTag> pointsSet = areaData.mineralAreas.get(entity.getItem().getItem().getClass());
+
+            if (pointsSet==null){
+                areaData.mineralAreas.put((Class<? extends ItemRawOre>) entity.getItem().getItem().getClass(),new HashMap<>());
+                pointsSet = areaData.mineralAreas.get(entity.getItem().getItem().getClass());
+            }
+
             for (int[][] points:pointsSet.keySet()){
                 if(MineralAreaData.inArea(pos,points)) {
                     isRecorded.set(true);

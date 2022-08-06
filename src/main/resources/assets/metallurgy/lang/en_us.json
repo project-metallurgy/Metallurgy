@@ -1,9 +1,18 @@
 {
   "itemGroup.metallurgy_metal": "Metallurgy | Metal",
   "block.metallurgy.copper_concentrate":"Copper Concentrate",
+  "block.metallurgy.stone_anvil":"Stone Anvil",
+  "block.metallurgy.mortar":"Stone Mortar",
+  "block.metallurgy.hematite":"Hematite",
+  "block.metallurgy.malachite":"Malachite",
+  "block.metallurgy.chalcopyrite":"Chalcopyrite",
+
   "item.metallurgy.raw_hematite_item":"Raw Hematite",
   "item.metallurgy.raw_malachite_item":"Raw Malachite",
   "item.metallurgy.raw_chalcopyrite_item":"Raw Chalcopyrite",
+  "item.metallurgy.stone_hammer":"Stone Hammer",
+  "item.metallurgy.stone_pestle":"Stone Pestle",
+
   "label.granularity": "Granularity:",
   "label.mass": "Mass:"
 }

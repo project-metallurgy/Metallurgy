@@ -9,6 +9,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 import projectmetallurgy.metallurgy.advanced.DataSupplier;
 import projectmetallurgy.metallurgy.advanced.MetallurgyConfigs;
@@ -50,17 +51,24 @@ public class Metallurgy {
         listOfItemRawOre.add(ItemRawHematite.class);
         listOfItemRawOre.add(ItemRawMalachite.class);
         listOfItemRawOre.add(ItemRawChalcopyrite.class);
-        
+
+        boolean isProduction = FMLEnvironment.production;
         // FIXME: 2022/7/25 Remember to turn oreGen on!
-        /*
+
         Field CODEC = null;
 
         try {
-            CODEC = OreConfiguration.class.getDeclaredField("CODEC");
+            if (!isProduction) {
+                CODEC = OreConfiguration.class.getDeclaredField("CODEC");
+            }else {
+                CODEC = Class.forName("net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration").getDeclaredField("f_67837_");
+            }
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
-
+        System.out.println(isProduction);
         try {
             CODEC.setAccessible(true);
         } catch (NullPointerException e) {
@@ -72,7 +80,7 @@ public class Metallurgy {
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        */
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MetallurgyConfigs.CONFIG_SPEC,"metallurgy-configs.toml");
         BlockRegistry.BLOCKS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
